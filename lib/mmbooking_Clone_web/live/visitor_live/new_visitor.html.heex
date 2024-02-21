@@ -1,0 +1,52 @@
+<p>New Visitor Form</p>
+<.simple_form :let={form} for={%{}} phx-submit="redirect">
+   <.input
+     field={form[:first_name]}
+     type="text"
+     label="First Name"
+     maxlength="20"
+     required    
+    />
+
+   <.input
+     field={form[:last_name]}
+     type="text"
+     label="Last Name"
+     maxlength="20"
+     required          
+    />
+   <.input
+     field={form[:dob]}
+     type="date"
+     label="Date Of Birth"
+     required    
+    />
+   <.input
+     field={form[:country]}
+     type="text"
+     label="Country"
+     required       
+    />
+   <.input
+     field={form[:city]}
+     type="text"
+     label="City"
+     maxlength="30"
+     required          
+    />
+   <.input
+     field={form[:have_you_visited_inner_chamber]}
+     type="text"
+     label="Have you visited the inner chamber in the past?"
+     required     
+    />
+   <.input
+     field={form[:last_date_of_visit]}
+     type="text"
+     label="If YES, enter the date of your last visit"
+     maxlength="30"
+     required    
+    />
+  <.button >next</.button>
+
+</.simple_form>

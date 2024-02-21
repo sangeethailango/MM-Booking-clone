@@ -1,0 +1,41 @@
+<p>New Booking Form</p>
+<.simple_form :let={form} for={%{}} phx-submit="redirect">
+   <.input
+     field={form[:preferred_date]}
+     type="date"
+     label="Select Preferred Date of your visite"
+     required
+    />
+   <.input
+     field={form[:alternate_date_of_visit]}
+     type="date"
+     label="Alternate Date of visit(optional)"
+     required
+    />
+   <.input
+     field={form[:place_of_stay]}
+     type="text"
+     label="Staying At(In or Around Auroville)"
+     required
+    />
+   <.input
+     field={form[:arrival_date]}
+     type="date"
+     label="Arrival Date"
+     required
+    />
+   <.input
+     field={form[:departure_date]}
+     type="date"
+     label="Departure Date"
+     required
+    />
+   <.input
+     field={form[:notes]}
+     type="text"
+     label="Notes"
+     required
+    />
+  <.button >next</.button>
+
+</.simple_form>

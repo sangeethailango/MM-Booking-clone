@@ -1,0 +1,33 @@
+
+<div>Welcome to the Inner Chamber Booking System!!!</div>
+<div>
+  <p>Kindly read the text below before requesting a visit to the Inner Chamber:</p>
+  <p>- The Inner Chamber is a place for silent concentration, and not
+  a TOURIST site. People keen to concentrate only may apply.
+  - Each individual visiting the Inner Chamber must fill one booking form. Booking is granted individually based on availability.
+  - Please do NOT submit duplicate requests using different Email addresses.
+  - Inner Chamber is closed on all Sundays and Tuesdays.
+  - Children below 10 years are NOT permitted.
+  - You must Report at Auroville Visitors Center between
+  8:15 and 8.30 am on the Day of your Visit.
+  </p>
+</div>
+
+<.simple_form :let={form} for={%{}} phx-submit="redirect">
+
+   <.input
+     field={form[:email_id]}
+     type="email"
+     label="Email ID"
+     required
+    />
+
+    <div>
+      <input type="checkbox" class="peer" id="agree" name="agree" value="true" required >
+      <label for="agree"> I Agree to Report between 8:15am to 8:30am </label><br>
+      <div class="visible peer-checked:hidden text-red-800 text-xs pt-2">People who can report at the Auroville Visitor Center between 8:15 to 8:30 am can only request a booking</div>
+    </div>
+
+  <.button >Proceed</.button>
+
+</.simple_form>
