@@ -1,15 +1,56 @@
 defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
   use Mmbooking_CloneWeb, :live_view
 
+  alias Mmbooking_Clone.User
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    {:ok,
+    socket
+    |> assign(form: "one")
+    |> assign(city: nil)
+   }
   end
 
-  def handle_event("redirect", params, socket) do
-
+  def handle_event("visitor-form-submit", params, socket) do
     {:noreply,
     socket
-    |> push_navigate(to: ~p"/new_booking?first_name=#{params["first_name"]}&last_name=#{params["last_name"]}&dob=#{params["dob"]}&country=#{params["country"]}&last_date_of_visit=#{params["last_date_of_visit"]}&have_you_visited_inner_chamber=#{params["have_you_visited_inner_chamber"]}")
+    |> assign(form: "two")
+    |> assign(city: params["city"])
+    |> assign(country: params["country"])
+    |> assign(dob: params["dob"])
+    |> assign(first_name: params["sangeetha"])
+    |> assign(have_you_visited_inner_Chamber: params["have_you_visited_inner_Chamber"])
+    |> assign(last_name: params["last_name"])
+    |> assign(first_name: params["first_name"])
+  }
+  end
+
+  def handle_event("booking-form-submit", params, socket) do
+    {:noreply,
+    socket
+    |> assign(form: "three")
+    |> assign(first_name: socket.assigns.first_name)
+    |> assign(last_name: socket.assigns.last_name)
+    |> assign(dob: socket.assigns.dob)
+    |> assign(country: socket.assigns.country)
+    |> assign(city: socket.assigns.city)
+    |> assign(have_you_visited_inner_chamber: socket.assigns.have_you_visited_inner_Chamber)
+    |> assign(preferred_date: params["preferred_date"])
+    |> assign(alternate_date: params["alternate_date_of_visit"])
+    |> assign(place_of_stay: params["place_of_stay"])
+    |> assign(arrival_date: params["arrival_date"] )
+    |> assign(departure_date: params["departure_date"])
+    |> assign(notes: params["notes"])
     }
   end
+
+  # def handle_event("save", _params, socket) do
+  #   visitor =  Map.new([{:alternate_date_of_visit, socket.assigns.alternate_date },{:arrival_date, socket.assigns.arrival_date},
+  #   {:city, socket.assigns. city},{:country, socket.assigns.country},{:departure_date, socket.assigns.departure_date },{:dob, socket.assigns.dob },
+  #   {:email_id, ""},{:first_name, socket.assigns.first_name },{:have_you_visited_inner_chamber, socket.assigns.have_you_visited_inner_Chamber },
+  #   {:last_name, socket.assigns.last_name },{:notes, socket.assigns.notes },{:place_of_stay, socket.assigns.place_of_stay },{:preferred_date, socket.assigns.preferred_date}])
+
+  #   User.insert_new_visitor(visitor)
+
+  #   {:noreply, socket}
+  # end
 end

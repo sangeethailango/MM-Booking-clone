@@ -1,52 +1,115 @@
-<p>New Visitor Form</p>
-<.simple_form :let={form} for={%{}} phx-submit="redirect">
-   <.input
-     field={form[:first_name]}
-     type="text"
-     label="First Name"
-     maxlength="20"
-     required    
-    />
+<%= if @form == "one" do %>
+    <p>New Visitor Form</p>
+      <.simple_form :let={form} for={%{}} phx-submit="visitor-form-submit">
+        <.input
+          field={form[:first_name]}
+          type="text"
+          label="First Name"
+          maxlength="20"
+          
+          />
+        <.input
+          field={form[:last_name]}
+          type="text"
+          label="Last Name"
+          maxlength="20"
+          
+          />
+        <.input
+          field={form[:dob]}
+          type="date"
+          label="Date Of Birth"
+          
+          />
+        <.input
+          field={form[:country]}
+          type="text"
+          label="Country"
+          
+          />
+        <.input
+          field={form[:city]}
+          type="text"
+          label="City"
+          maxlength="30"
+          
+          />
+        <.input
+          field={form[:have_you_visited_inner_chamber]}
+          type="text"
+          label="Have you visited the inner chamber in the past?"
+          
+          />
+        <.input
+          field={form[:last_date_of_visit]}
+          type="text"
+          label="If YES, enter the date of your last visit"
+          maxlength="30"
+          
+          />
+        <.button >next</.button>
 
-   <.input
-     field={form[:last_name]}
-     type="text"
-     label="Last Name"
-     maxlength="20"
-     required          
-    />
-   <.input
-     field={form[:dob]}
-     type="date"
-     label="Date Of Birth"
-     required    
-    />
-   <.input
-     field={form[:country]}
-     type="text"
-     label="Country"
-     required       
-    />
-   <.input
-     field={form[:city]}
-     type="text"
-     label="City"
-     maxlength="30"
-     required          
-    />
-   <.input
-     field={form[:have_you_visited_inner_chamber]}
-     type="text"
-     label="Have you visited the inner chamber in the past?"
-     required     
-    />
-   <.input
-     field={form[:last_date_of_visit]}
-     type="text"
-     label="If YES, enter the date of your last visit"
-     maxlength="30"
-     required    
-    />
-  <.button >next</.button>
+      </.simple_form>
+<% end %>
+<%= if @form == "two" do %>
+    <p>New Booking Form</p>
+    <.simple_form :let={form} for={%{}} phx-submit="booking-form-submit">
+      <.input
+        field={form[:preferred_date]}
+        type="date"
+        label="Select Preferred Date of your visite"
+        
+        />
+      <.input
+        field={form[:alternate_date_of_visit]}
+        type="date"
+        label="Alternate Date of visit(optional)"
+        
+        />
+      <.input
+        field={form[:place_of_stay]}
+        type="text"
+        label="Staying At(In or Around Auroville)"
+        
+        />
+      <.input
+        field={form[:arrival_date]}
+        type="date"
+        label="Arrival Date"
+        
+        />
+      <.input
+        field={form[:departure_date]}
+        type="date"
+        label="Departure Date"
+        
+        />
+      <.input
+        field={form[:notes]}
+        type="text"
+        label="Notes"
+        
+        />
+      <.button >next</.button>
 
-</.simple_form>
+    </.simple_form>
+<% end %>
+<%= if @form == "three" do %>
+
+      <p>Verify Details</p>
+      <p class="text-black font-bold">First Name</p><%= @first_name  %>
+      <p text-black font-bold>last Name</p><%= @last_name%>
+      <p text-black font-bold>Date Of Birth</p><%= @dob%>
+      <p text-black font-bold>Country</p><%= @country%>
+      <p text-black font-bold>City</p><%= @city%>
+      <p text-black font-bold>Have You Visited Inner Chamber Before?</p><%= @have_you_visited_inner_chamber%>
+      <p text-black font-bold>Preferred Date</p><%= @preferred_date%>
+      <p text-black font-bold>Alternate Date</p><%= @alternate_date%>
+      <p text-black font-bold>Staying At</p><%= @place_of_stay%>
+      <p text-black font-bold>Arrival Date</p><%= @arrival_date%>
+      <p text-black font-bold>Departure Date</p><%= @departure_date%>
+      <p text-black font-bold>Notes</p><%= @notes%>
+      <.button phx-click="save">next</.button>
+    
+<% end %>
+

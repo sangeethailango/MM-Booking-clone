@@ -1,38 +1,26 @@
 defmodule Mmbooking_CloneWeb.VisitorLive.Welcome do
   use Mmbooking_CloneWeb, :live_view
 
-  alias Mmbooking_Clone.User
-
   def mount(_params, _session, socket) do
     {:ok,
     socket
+    |> assign(email_id: nil)
     |> assign(agree: nil)
     }
   end
 
-  def handle_event("redirect", params, socket) do
-    visitors = User.list_all_visitor()
-    emails = Enum.map(visitors, fn visitor -> visitor.email_id end)
+  def handle_event("proceed", params, socket) do
 
     case params["agree"] == "true" do
       true ->
-        case params["email_id"] in emails do
-          true ->
-          {:noreply,
-          socket
-          |> assign(agree: true)
-          |> push_navigate(to: "/new_booking")
-          }
-          false ->
-            {:noreply,
-            socket
-            |> assign(agree: true)
-            |> push_navigate(to: ~p"/new_visitor")
-            }
-        end
+        {:noreply,
+        socket
+        |> push_navigate(to: ~p"/form")
+        }
       false ->
         {:noreply,
         socket
+        |> assign(email_id: params["email_id"])
         |> assign(agree: false)
         }
     end

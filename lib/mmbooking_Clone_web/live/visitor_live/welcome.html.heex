@@ -13,20 +13,21 @@
   </p>
 </div>
 
-<.simple_form :let={form} for={%{}} phx-submit="redirect">
+<.simple_form :let={form} for={%{}} phx-submit="proceed">
 
    <.input
      field={form[:email_id]}
      type="email"
+     value={@email_id}
      label="Email ID"
      required
     />
 
-    <.input 
+    <.input
      field={form[:agree]}
      type="checkbox"
      label="I Agree to Report between 8:15am to 8:30am"
-    /> 
+    />
 
     <%= if @agree == false do %>
     <div class="rounded-md bg-yellow-50 p-4">
