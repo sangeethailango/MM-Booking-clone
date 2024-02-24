@@ -7,10 +7,22 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     socket
     |> assign(form: "one")
     |> assign(city: nil)
+    |> assign(repeat_visitor: nil)
+    |> assign(first_name: nil)
+    |> assign(last_name: nil)
+    |> assign(city: nil)
+    |> assign(country: nil)
+    |> assign(dob: nil)
+
    }
   end
 
   def handle_event("visitor-form-submit", params, socket) do
+    have_you_visited_inner_chamber = case params["have_you_visited_inner_chamber"] do
+      "Yes" -> true
+      "No" -> false
+    end
+
     {:noreply,
     socket
     |> assign(form: "two")
@@ -18,11 +30,23 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     |> assign(country: params["country"])
     |> assign(dob: params["dob"])
     |> assign(first_name: params["sangeetha"])
-    |> assign(have_you_visited_inner_chamber: params["have_you_visited_inner_chamber"])
+    |> assign(have_you_visited_inner_chamber: have_you_visited_inner_chamber)
     |> assign(last_date_of_visit: params["last_date_of_visit"])
     |> assign(last_name: params["last_name"])
     |> assign(first_name: params["first_name"])
   }
+  end
+
+  def handle_event("repeat_visitor", params, socket) do
+    {:noreply,
+    socket
+    |> assign(repeat_visitor: params["have_you_visited_inner_chamber"])
+    |> assign(first_name: params["first_name"])
+    |> assign(last_name: params["last_name"])
+    |> assign(city: params["city"])
+    |> assign(country: params["country"])
+    |> assign(dob: params["dob"])
+    }
   end
 
   def handle_event("booking-form-submit", params, socket) do
@@ -52,7 +76,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     {:email_id, "sangeethailango@gmail.com"},{:first_name, socket.assigns.first_name },{:have_you_visited_inner_chamber, socket.assigns.have_you_visited_inner_chamber },
     {:last_name, socket.assigns.last_name },{:notes, socket.assigns.notes },{:place_of_stay, socket.assigns.place_of_stay },{:preferred_date, socket.assigns.preferred_date},{:last_date_of_visit, socket.assigns.last_date_of_visit}])
 
-    User.insert_new_visitor(visitor)
+    IO.inspect(User.insert_new_visitor(visitor), label: "Visitor data")
 
     {:noreply,
     socket
