@@ -2,6 +2,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
   use Mmbooking_CloneWeb, :live_view
 
   alias Mmbooking_Clone.User
+  alias Mmbooking_CloneWeb.VisitorLive.AcknowledgementEmail
   def mount(_params, _session, socket) do
     {:ok,
     socket
@@ -77,6 +78,8 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     {:last_name, socket.assigns.last_name },{:notes, socket.assigns.notes },{:place_of_stay, socket.assigns.place_of_stay },{:preferred_date, socket.assigns.preferred_date},{:last_date_of_visit, socket.assigns.last_date_of_visit}])
 
     IO.inspect(User.insert_new_visitor(visitor), label: "Visitor data")
+
+    AcknowledgementEmail.welcome(visitor.email_id)
 
     {:noreply,
     socket
