@@ -8,7 +8,12 @@ defmodule Mmbooking_Clone.User do
   end
 
   # def insert_new_visitor(user_details) do
-  #   Visitor
-  #  |> Repo.insert(user_details)
+  #   Repo.insert!(%Visitor{}, user_details)
   # end
+
+  def insert_new_visitor(user_details) do
+    %Visitor{}
+    |> Visitor.changeset(user_details)
+    |> Repo.insert()
+  end
 end

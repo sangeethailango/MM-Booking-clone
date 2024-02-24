@@ -18,7 +18,8 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     |> assign(country: params["country"])
     |> assign(dob: params["dob"])
     |> assign(first_name: params["sangeetha"])
-    |> assign(have_you_visited_inner_Chamber: params["have_you_visited_inner_Chamber"])
+    |> assign(have_you_visited_inner_chamber: params["have_you_visited_inner_chamber"])
+    |> assign(last_date_of_visit: params["last_date_of_visit"])
     |> assign(last_name: params["last_name"])
     |> assign(first_name: params["first_name"])
   }
@@ -33,7 +34,8 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     |> assign(dob: socket.assigns.dob)
     |> assign(country: socket.assigns.country)
     |> assign(city: socket.assigns.city)
-    |> assign(have_you_visited_inner_chamber: socket.assigns.have_you_visited_inner_Chamber)
+    |> assign(have_you_visited_inner_chamber: socket.assigns.have_you_visited_inner_chamber)
+    |> assign(last_date_of_visit: socket.assigns.last_date_of_visit)
     |> assign(preferred_date: params["preferred_date"])
     |> assign(alternate_date: params["alternate_date_of_visit"])
     |> assign(place_of_stay: params["place_of_stay"])
@@ -43,14 +45,18 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     }
   end
 
-  # def handle_event("save", _params, socket) do
-  #   visitor =  Map.new([{:alternate_date_of_visit, socket.assigns.alternate_date },{:arrival_date, socket.assigns.arrival_date},
-  #   {:city, socket.assigns. city},{:country, socket.assigns.country},{:departure_date, socket.assigns.departure_date },{:dob, socket.assigns.dob },
-  #   {:email_id, ""},{:first_name, socket.assigns.first_name },{:have_you_visited_inner_chamber, socket.assigns.have_you_visited_inner_Chamber },
-  #   {:last_name, socket.assigns.last_name },{:notes, socket.assigns.notes },{:place_of_stay, socket.assigns.place_of_stay },{:preferred_date, socket.assigns.preferred_date}])
+  def handle_event("save", _params, socket) do
 
-  #   User.insert_new_visitor(visitor)
+    visitor =  Map.new([{:alternate_date_of_visit, socket.assigns.alternate_date },{:arrival_date, socket.assigns.arrival_date},
+    {:city, socket.assigns. city},{:country, socket.assigns.country},{:departure_date, socket.assigns.departure_date },{:dob, socket.assigns.dob },
+    {:email_id, "sangeethailango@gmail.com"},{:first_name, socket.assigns.first_name },{:have_you_visited_inner_chamber, socket.assigns.have_you_visited_inner_chamber },
+    {:last_name, socket.assigns.last_name },{:notes, socket.assigns.notes },{:place_of_stay, socket.assigns.place_of_stay },{:preferred_date, socket.assigns.preferred_date},{:last_date_of_visit, socket.assigns.last_date_of_visit}])
 
-  #   {:noreply, socket}
-  # end
+    User.insert_new_visitor(visitor)
+
+    {:noreply,
+    socket
+    |> push_navigate(to: ~p"/report")
+    }
+  end
 end
