@@ -7,7 +7,7 @@
           label="First Name"
           maxlength="20"
           value={@first_name}
-          
+          required
           />
         <.input
           field={form[:last_name]}
@@ -15,6 +15,7 @@
           label="Last Name"
           maxlength="20"
           value={@last_name}
+          required
 
           />
         <.input
@@ -22,6 +23,7 @@
           type="date"
           label="Date Of Birth"
           value={@dob}
+          required
           
           />
         <.input
@@ -29,6 +31,7 @@
           type="text"
           label="Country"
           value={@country}
+          required
           
           />
         <.input
@@ -37,6 +40,7 @@
           label="City"
           maxlength="30"
           value={@city}
+          required
           
           />
         <.input
@@ -46,6 +50,7 @@
           options = {["Yes", "No"]}
 
           label="Have you visited the inner chamber in the past?"
+          required
           
           />
         <%= if @repeat_visitor == "Yes" do %>  
@@ -54,6 +59,7 @@
           type="text"
           label="If YES, enter the date of your last visit"
           maxlength="30"
+          required
           
           />
         <% end %>
