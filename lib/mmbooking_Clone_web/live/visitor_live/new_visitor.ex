@@ -16,6 +16,13 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     |> assign(city: nil)
     |> assign(country: nil)
     |> assign(dob: nil)
+    |> assign(preferred_date: nil)
+    |> assign(alternate_date_of_visit: nil)
+    |> assign(place_of_stay: nil)
+    |> assign(arrival_date: nil)
+    |> assign(departure_date: nil)
+    |> assign(notes: nil)
+    |> assign(date_validation: nil)
     |> assign(list_of_countries: countries)
    }
   end
@@ -40,7 +47,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
   }
   end
 
-  def handle_event("repeat_visitor", params, socket) do
+  def handle_event("repeat_visitor-change", params, socket) do
     {:noreply,
     socket
     |> assign(repeat_visitor: params["have_you_visited_inner_chamber"])
@@ -53,9 +60,25 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
   end
 
   def handle_event("booking-form-submit", params, socket) do
+
+    date_validation = cond do
+      params["preferred_date"] == params["arrival_date"] -> "pref date and arr date is same"
+      params["preferred_date"] > params["departure_date"] -> "pref date is greater than dep date"
+      params["arrival_date"] == params["departure_date"] -> "arr date and dep date are same"
+      true -> nil
+    end
+    nil
+
+    form = if params["preferred_date"] == params["arrival_date"] or (params["preferred_date"] > params["departure_date"] or params["arrival_date"] == params["departure_date"]) do
+      "two"
+    else
+      "three"
+    end
+
     {:noreply,
     socket
-    |> assign(form: "three")
+    |> assign(form: form)
+    |> assign(date_validation: date_validation)
     |> assign(first_name: socket.assigns.first_name)
     |> assign(last_name: socket.assigns.last_name)
     |> assign(dob: socket.assigns.dob)
@@ -72,16 +95,29 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     }
   end
 
+  def handle_event("booking-form-validation-change", params, socket) do
+
+    {:noreply,
+    socket
+    |> assign(preferred_date: params["preferred_date"])
+    |> assign(departure_date: params["departure_date"])
+    |> assign(arrival_date: params["arrival_date"])
+    |> assign(alternate_date_of_visit: params["alternate_date_of_visit"])
+    |> assign(place_of_stay: params["place_of_stay"])
+    |> assign(notes: params["notes"])
+    }
+  end
+
   def handle_event("save", _params, socket) do
 
-    visitor =  Map.new([{:alternate_date_of_visit, socket.assigns.alternate_date },{:arrival_date, socket.assigns.arrival_date},
+    visitor_detail =  Map.new([{:alternate_date_of_visit, socket.assigns.alternate_date },{:arrival_date, socket.assigns.arrival_date},
     {:city, socket.assigns. city},{:country, socket.assigns.country},{:departure_date, socket.assigns.departure_date },{:dob, socket.assigns.dob },
     {:email_id, "sangeethailango@gmail.com"},{:first_name, socket.assigns.first_name },{:have_you_visited_inner_chamber, socket.assigns.have_you_visited_inner_chamber },
     {:last_name, socket.assigns.last_name },{:notes, socket.assigns.notes },{:place_of_stay, socket.assigns.place_of_stay },{:preferred_date, socket.assigns.preferred_date},{:last_date_of_visit, socket.assigns.last_date_of_visit}])
 
-    IO.inspect(User.insert_new_visitor(visitor), label: "Visitor data")
+    User.insert_new_visitor(visitor_detail)
 
-    AcknowledgementEmail.welcome(visitor.email_id)
+    AcknowledgementEmail.welcome(visitor_detail.email_id)
 
     {:noreply,
     socket
