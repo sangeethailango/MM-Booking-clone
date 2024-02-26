@@ -18,6 +18,9 @@ defmodule Mmbooking_CloneWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/welcome", VisitorLive.Welcome, :index
+    live "/form", VisitorLive.NewVisitor
+    live "/report", VisitorLive.Report
   end
 
   # Other scopes may use custom stacks.
