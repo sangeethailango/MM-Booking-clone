@@ -28,11 +28,13 @@
           />
         <.input
           field={form[:country]}
-          type="text"
+          type="select"
           label="Country"
+          options={@list_of_countries}
+          prompt="Select your country"
           value={@country}
           required
-          
+
           />
         <.input
           field={form[:city]}
