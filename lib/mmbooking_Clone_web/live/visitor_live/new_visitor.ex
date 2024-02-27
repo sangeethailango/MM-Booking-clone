@@ -65,11 +65,14 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
       params["preferred_date"] == params["arrival_date"] -> "pref date and arr date is same"
       params["preferred_date"] > params["departure_date"] -> "pref date is greater than dep date"
       params["arrival_date"] == params["departure_date"] -> "arr date and dep date are same"
+      params["preferred_date"] < params["arrival_date"] -> "pref date is less than arr date"
+      params["alternate_date_of_visit"] > params["departure_date"]  -> "alt date of visit is greater than dep date"
       true -> nil
     end
     nil
 
-    form = if params["preferred_date"] == params["arrival_date"] or (params["preferred_date"] > params["departure_date"] or params["arrival_date"] == params["departure_date"]) do
+    form = if params["preferred_date"] == params["arrival_date"] or (params["preferred_date"] > params["departure_date"] or
+    params["arrival_date"] == params["departure_date"]) or params["preferred_date"] < params["arrival_date"] or params["alternate_date_of_visit"] > params["departure_date"] do
       "two"
     else
       "three"

@@ -81,12 +81,18 @@
       <%= if @date_validation == "pref date is greater than dep date" do %>  
        <p class="text-red-900">Sorry! Visit later than your Departure Date is not permitted.</p>   
       <% end %>
+      <%= if @date_validation == "pref date is less than arr date" do%>
+      <p class="text-red-900">Sorry! Preferred Date cannot be less than Arrival Date</p>
+      <% end %>
       <.input
         field={form[:alternate_date_of_visit]}
         type="date"
         label="Alternate Date of visit(optional)"
         value={@alternate_date_of_visit}
         />
+      <%= if @date_validation == "alt date of visit is greater than dep date" do%>
+      <p class="text-red-900">Sorry! Alternate Date of Visit cannot be greater than Departure Date</p>
+      <% end %>
       <.input
         field={form[:place_of_stay]}
         type="text"
