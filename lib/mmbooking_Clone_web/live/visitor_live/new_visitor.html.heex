@@ -1,6 +1,10 @@
 <%= if @form == "one" do %>
     <p>New Visitor Form</p>
       <.simple_form :let={form} for={%{}} phx-change="repeat_visitor-change" phx-submit="visitor-form-submit">
+        <div> 
+          <p><b> Email ID</b> </p>
+          <%=@email_id %>
+        </div>
         <.input
           field={form[:first_name]}
           type="text"
@@ -142,7 +146,9 @@
       <p text-black font-bold>Arrival Date</p><%= @arrival_date%>
       <p text-black font-bold>Departure Date</p><%= @departure_date%>
       <p text-black font-bold>Notes</p><%= @notes%>
-      <.button phx-click="save">next</.button>
-    
+      <p text-black font-bold>Email ID</p> <%= @email_id%> 
+      <div>
+        <.button phx-click="save">next</.button>
+      </div>
 <% end %>
 

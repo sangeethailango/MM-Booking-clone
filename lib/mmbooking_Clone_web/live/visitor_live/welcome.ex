@@ -15,7 +15,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.Welcome do
       true ->
         {:noreply,
         socket
-        |> push_navigate(to: ~p"/form")
+        |> push_navigate(to: ~p"/form/#{params["email_id"]}")
         }
       false ->
         {:noreply,
