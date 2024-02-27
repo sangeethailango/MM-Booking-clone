@@ -14,7 +14,11 @@ defmodule Mmbooking_Clone.User do
   def insert_new_visitor(user_details) do
     %Visitor{}
     |> Visitor.changeset(user_details)
-    |> Repo.insert()
+    |> Repo.insert!()
+  end
+
+  def get_visitor_by_id(id) do
+    Repo.get(Visitor, id)
   end
 
   def list_of_countries() do
