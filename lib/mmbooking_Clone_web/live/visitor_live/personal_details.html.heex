@@ -1,0 +1,43 @@
+<p><b>Personal Details</b></p>
+
+  <.simple_form :let={form} for={%{}} phx-change="visitor-name-change">
+    <.input
+      field={form[:id]}
+      type="select"
+      prompt={@first_name}
+      label="Select Name"
+      options={(@family_member_names)}
+      required
+      />
+  </.simple_form>    
+
+  <div>
+    <span>First Name</span> 
+    <span class="pl-4"><%= @first_name %></span>
+  </div>
+  <div>
+    <span>Last Name</span> 
+    <span class="pl-4"><%= @last_name %></span>
+  </div>
+  <div>
+    <span>Date Of Birth</span> 
+    <span class="pl-4"><%= @dob %></span>
+  </div>
+  <div>
+    <span>Email ID</span> 
+    <span class="pl-4"><%= @email_id %></span>
+  </div>
+  <div>
+    <span>Country</span> 
+    <span class="pl-4"><%= @country %></span>
+  </div>
+  <div>
+    <span>City</span> 
+    <span class="pl-4"><%= @city %></span>
+  </div>
+
+  <.link href={~p"/your_bookings/#{@id}"}>
+    <.button>
+      Bookings
+    </.button>
+  </.link>  
