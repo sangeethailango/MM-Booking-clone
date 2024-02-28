@@ -11,6 +11,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.YourBookings do
     socket
     |> assign(visitor: [visitor])
     |> assign(status: status)
+    |> assign(id: visitor.id)
     }
   end
 end

@@ -2,3 +2,10 @@
     <:col :let={visitor} label="Date"> <%= visitor.preferred_date%> </:col>
     <:col label="Status"> <%= @status %></:col>
   </.table>
+
+<.link href={~p"/visitor_home/#{@id}"}>
+    <.button>
+      Home
+    </.button>
+</.link>
+
