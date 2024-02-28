@@ -22,10 +22,9 @@ defmodule Mmbooking_CloneWeb.Router do
     live "/visitor_form/:email_id", VisitorLive.NewVisitor
     live "/report/:id", VisitorLive.Report
     live "/visitor_home/:id", VisitorLive.VisitorHome
-    live "/personal_details/:id", VisitorLive.PersonalDetails
+    live "/personal_details/:id", VisitorLive.PersonalDetails, :index
+    live "/edit_personal_details/:id", VisitorLive.PersonalDetails, :edit
     live "/your_bookings/:id", VisitorLive.YourBookings
-    live "/edit_your_bookings/:id", VisitorLive.EditPersonalDetails
-    live "/self_form_booking/:id", VisitorLive.SelfBookingForm
 
   end
 

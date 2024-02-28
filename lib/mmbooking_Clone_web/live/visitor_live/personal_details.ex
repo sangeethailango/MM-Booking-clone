@@ -21,6 +21,21 @@ defmodule Mmbooking_CloneWeb.VisitorLive.PersonalDetails do
     }
   end
 
+  def handle_params(params, _url, socket) do
+    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+  end
+
+  def apply_action(socket, :index, _params) do
+    socket
+    |> assign(:page_title, "Personal Details")
+  end
+
+  def apply_action(socket, :edit, _params) do
+    socket
+    |> assign(:page_title, "Edit User")
+    |> assign(id: socket.assigns.id)
+  end
+
   def handle_event("visitor-name-change", params, socket) do
     visitor = User.get_visitor_by_id(params["id"])
 
@@ -35,5 +50,11 @@ defmodule Mmbooking_CloneWeb.VisitorLive.PersonalDetails do
     |> assign(email_id: visitor.email_id)
     |> assign(id: visitor.id)
    }
+  end
+
+  def apply_acton(socket, :edit, params) do
+    IO.inspect(params)
+    socket
+    |> assign(page_title: "Edit Personal Details")
   end
 end

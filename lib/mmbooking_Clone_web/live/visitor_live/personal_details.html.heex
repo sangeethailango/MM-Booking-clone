@@ -42,7 +42,7 @@
     </.button>
   </.link>
 
-   <.link href={~p"/edit_your_bookings/#{@id}"}>
+   <.link href={~p"/edit_personal_details/#{@id}"}>
     <.button>
       Edit
     </.button>
@@ -53,3 +53,19 @@
       Home
     </.button>
   </.link>    
+
+
+<.modal 
+  :if={@live_action in [:edit]}
+  id = "Edit"
+  show
+  on_cancel={JS.navigate(~p"/personal_details/#{@id}")}
+>
+  <.live_component
+    module={Mmbooking_CloneWeb.VisitorLive.EditPersonalDetailsComponent}
+    id={:new}
+    title={@page_title}
+    live_action={@live_action}
+    navigate={~p"/personal_details/#{@id}"}
+  />
+</.modal>  
