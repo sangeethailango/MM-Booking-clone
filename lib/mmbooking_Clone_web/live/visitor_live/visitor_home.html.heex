@@ -1,16 +1,22 @@
-<.table id="visitors" rows={@family_members}>
+  <.table id="visitors" rows={@family_members}>
+    <:col :let={family_member} label="select" >
+       <input type="radio" name="Visitor" value={family_member.id} phx-click="selected-member-change">
+    </:col>
+    <:col :let={family_member} label="First Name">
+      <.link href={~p"/personal_details/#{family_member.id}"}><u> <%= family_member.first_name%> </u> </.link>
+    </:col>
+    <:col :let={family_member} label="Last Name"> <%= family_member.last_name%> </:col>
+    <:col :let={family_member} label="Date Of Birth"> <%= family_member.dob%> </:col>
+  </.table>
 
-  <:col :let={family_member} label="First Name">
-    <.link href={~p"/personal_details/#{family_member.id}"}><u> <%= family_member.first_name%> </u> </.link>
-  </:col>
-  <:col :let={family_member} label="Last Name"> <%= family_member.last_name%> </:col>
-  <:col :let={family_member} label="Date Of Birth"> <%= family_member.dob%> </:col>
+  <.button phx-click="bookings">
+    Booking
+  </.button>
 
-</.table>
+  <.button phx-click="Add-New-Member">
+      Click here to Add A Family Member
+  </.button>
 
-<.button phx-click="Add-New-Member">
-    Click here to Add A Family Member
-</.button>
-<%= if @warning == true do %>
-<p class="text-red-900">Sorry! Only 6 members are allowed per Email ID</p>
-<% end %>
+  <%= if @warning == true do %>
+    <p class="text-red-900">Sorry! Only 6 members are allowed per Email ID</p>
+  <% end %>

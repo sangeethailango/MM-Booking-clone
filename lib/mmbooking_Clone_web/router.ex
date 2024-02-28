@@ -23,6 +23,7 @@ defmodule Mmbooking_CloneWeb.Router do
     live "/report/:id", VisitorLive.Report
     live "/visitor_home/:id", VisitorLive.VisitorHome
     live "/personal_details/:id", VisitorLive.PersonalDetails
+    live "/your_bookings/:id", VisitorLive.YourBookings
   end
 
   # Other scopes may use custom stacks.

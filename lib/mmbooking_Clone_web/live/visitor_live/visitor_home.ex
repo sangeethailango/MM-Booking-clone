@@ -29,4 +29,20 @@ defmodule Mmbooking_CloneWeb.VisitorLive.VisitorHome do
       }
     end
   end
+
+  def handle_event("selected-member-change", params, socket) do
+
+    {:noreply,
+    socket
+    |> assign(id: params["value"])
+    }
+  end
+
+  def handle_event("bookings", _params, socket) do
+    id = String.to_integer(socket.assigns.id)
+    {:noreply,
+    socket
+    |> push_navigate(to: ~p"/your_bookings/#{id}")
+    }
+  end
 end
