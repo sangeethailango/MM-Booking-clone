@@ -1,3 +1,13 @@
+ <h1 class="font-bold text-xl">
+ Home
+ </h1> 
+ <div class="pt-4 text-gray-600">
+   <p>You are signed in as <%= @email_id%>.</p> 
+   <p>The following Profiles are registered using this Email ID</p>
+ </div>
+ <div class="pt-4 text-gray-600">
+ Select a name below and click on "Bookings" button to view your past bookings or make a new booking
+ </div>
   <.table id="visitors" rows={@family_members}>
     <:col :let={family_member} label="select" >
        <input type="radio" name="Visitor" value={family_member.id} phx-click="selected-member-change">
@@ -8,15 +18,16 @@
     <:col :let={family_member} label="Last Name"> <%= family_member.last_name%> </:col>
     <:col :let={family_member} label="Date Of Birth"> <%= family_member.dob%> </:col>
   </.table>
-
+<div class="text-end pt-8">
   <.button phx-click="bookings">
     Booking
   </.button>
-
-  <.button phx-click="Add-New-Member">
-      Click here to Add A Family Member
-  </.button>
-
+</div>
+<div>
+  <.link phx-click="Add-New-Member" class="text-blue-500">
+      <u>Click here to Add A Family Member</u>
+  </.link>
+</div>
   <%= if @warning == true do %>
-    <p class="text-red-900">Sorry! Only 6 members are allowed per Email ID</p>
+    <p class="text-red-900 pt-4">Sorry! Only 6 members are allowed per Email ID</p>
   <% end %>
