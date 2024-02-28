@@ -21,6 +21,7 @@ defmodule Mmbooking_CloneWeb.Router do
     live "/welcome", VisitorLive.Welcome, :index
     live "/form/:email_id", VisitorLive.NewVisitor
     live "/report/:id", VisitorLive.Report
+    live "/visitor_home/:id", VisitorLive.VisitorHome
   end
 
   # Other scopes may use custom stacks.

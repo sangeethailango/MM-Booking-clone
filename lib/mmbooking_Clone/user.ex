@@ -1,15 +1,13 @@
 defmodule Mmbooking_Clone.User do
 
+  import Ecto.Query
   alias Mmbooking_Clone.User.Visitor
   alias Mmbooking_Clone.Repo
+
 
   def list_all_visitor() do
     Repo.all(Visitor)
   end
-
-  # def insert_new_visitor(user_details) do
-  #   Repo.insert!(%Visitor{}, user_details)
-  # end
 
   def insert_new_visitor(user_details) do
     %Visitor{}
@@ -19,6 +17,14 @@ defmodule Mmbooking_Clone.User do
 
   def get_visitor_by_id(id) do
     Repo.get(Visitor, id)
+  end
+
+  def family_members(email_id) do
+    query =
+      from v in Visitor,
+      where: v.email_id == ^email_id
+
+    Repo.all(query)
   end
 
   def list_of_countries() do
