@@ -12,7 +12,6 @@ defmodule Mmbooking_CloneWeb.VisitorLive.Welcome do
   end
 
   def handle_event("proceed", params, socket) do
-
     all_visitors = User.list_all_visitor()
     emails = Enum.map(all_visitors, fn visitor -> visitor.email_id end)
 
@@ -29,7 +28,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.Welcome do
         else
           {:noreply,
           socket
-          |> push_navigate(to: ~p"/form/#{params["email_id"]}")
+          |> push_navigate(to: ~p"/visitor_form/#{params["email_id"]}")
           }
         end
       false ->

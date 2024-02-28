@@ -7,3 +7,10 @@
   <:col :let={family_member} label="Date Of Birth"> <%= family_member.dob%> </:col>
 
 </.table>
+
+<.button phx-click="Add-New-Member">
+    Click here to Add A Family Member
+</.button>
+<%= if @warning == true do %>
+<p class="text-red-900">Sorry! Only 6 members are allowed per Email ID</p>
+<% end %>

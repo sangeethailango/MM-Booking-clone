@@ -19,7 +19,7 @@ defmodule Mmbooking_CloneWeb.Router do
 
     get "/", PageController, :home
     live "/welcome", VisitorLive.Welcome, :index
-    live "/form/:email_id", VisitorLive.NewVisitor
+    live "/visitor_form/:email_id", VisitorLive.NewVisitor
     live "/report/:id", VisitorLive.Report
     live "/visitor_home/:id", VisitorLive.VisitorHome
     live "/personal_details/:id", VisitorLive.PersonalDetails

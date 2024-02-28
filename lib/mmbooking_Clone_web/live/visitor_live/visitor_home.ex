@@ -9,6 +9,24 @@ defmodule Mmbooking_CloneWeb.VisitorLive.VisitorHome do
     {:ok,
     socket
     |> assign(family_members: family_members)
+    |> assign(email_id: visitor.email_id)
+    |> assign(warning: false)
     }
+  end
+
+  def handle_event("Add-New-Member", _params, socket) do
+    family_members = User.family_members(socket.assigns.email_id)
+
+    if Enum.count(family_members) >= 6 do
+      {:noreply,
+      socket
+      |> assign(warning: true)
+      }
+    else
+      {:noreply,
+      socket
+      |> push_navigate(to: ~p"/visitor_form/#{socket.assigns.email_id}")
+      }
+    end
   end
 end
