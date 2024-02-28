@@ -22,7 +22,6 @@ defmodule Mmbooking_CloneWeb.VisitorLive.PersonalDetails do
   end
 
   def handle_event("visitor-name-change", params, socket) do
-    IO.inspect(params, label: "Params")
     visitor = User.get_visitor_by_id(params["id"])
 
     {:noreply,
