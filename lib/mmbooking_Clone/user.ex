@@ -27,6 +27,14 @@ defmodule Mmbooking_Clone.User do
     Repo.all(query)
   end
 
+  def status(visitor) do
+    if Date.compare(visitor.preferred_date, Date.utc_today) == :gt do
+      "Request Sent"
+    else
+      nil
+    end
+  end
+
   def list_of_countries() do
     ["Afghanistan",
     "Albania",
