@@ -1,0 +1,64 @@
+  <p>Self Booking Form</p>
+  <div>
+    <.simple_form :let={form} for={%{}}  phx-submit="submit">
+      <div>
+        <p class="font-bold">First Name</p>
+        <p><%= @first_name %></p>
+      </div>
+      <.input
+        field={form[:preferred_date]}
+        type="date"
+        value={@preferred_date}
+        label="Preferred Date"
+        required
+        />
+        <.input
+        field={form[:place_of_stay]}
+        type="text"
+        label="Place Of Stay"
+        value={@place_of_stay}
+        maxlength="30"
+        required
+        />
+        <.input
+        field={form[:arrival_date]}
+        type="date"
+        label="Arrival Date"
+        value={@arrival_date}
+        required
+        />
+        <%= if @date_validation == "alt date of visit is greater than dep date" do%>
+          <p class="text-red-900">Sorry! Alternate Date of Visit cannot be greater than Departure Date</p>
+        <% end %>
+        <%= if @date_validation == "pref date and arr date is same" do %>
+          <p class="text-red-900">Sorry! Visit on the same day as your Arrival Date in or around Auroville is not permitted.</p>
+        <% end %>
+
+        <.input
+        field={form[:departure_date]}
+        type="date"
+        value={@departure_date}
+        label="Departure Date"
+        required
+        />
+      <%= if @date_validation == "pref date is greater than dep date" do %>
+        <p class="text-red-900">Sorry! Visit later than your Departure Date is not permitted.</p>
+      <% end %>
+      <%= if @date_validation == "pref date is less than arr date" do%>
+        <p class="text-red-900">Sorry! Preferred Date cannot be less than Arrival Date</p>
+      <% end %>
+      <%= if @date_validation == "arr date and dep date are same" do %>
+        <p class="text-red-900">Sorry! Visitors coming for a day visit to Auroville are not permitted</p>
+      <% end %>
+       <.input
+        field={form[:notes]}
+        type="text"
+        value={@notes}
+        label="Additional Notes"
+        maxlength="100"
+        required
+        />
+
+        <.button phx-disable-with="Saving..." value="submit">Submit</.button>
+    </.simple_form>
+  </div>

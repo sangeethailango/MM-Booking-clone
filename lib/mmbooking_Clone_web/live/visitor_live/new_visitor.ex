@@ -70,11 +70,10 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
       true -> nil
     end
 
-    form = if params["preferred_date"] == params["arrival_date"] or (params["preferred_date"] > params["departure_date"] or
-    params["arrival_date"] == params["departure_date"]) or params["preferred_date"] < params["arrival_date"] or params["alternate_date_of_visit"] > params["departure_date"] do
-      "two"
-    else
+    form = if date_validation == nil  do
       "three"
+    else
+      "two"
     end
 
     {:noreply,
