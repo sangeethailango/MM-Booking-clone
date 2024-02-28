@@ -25,6 +25,8 @@ defmodule Mmbooking_CloneWeb.Router do
     live "/personal_details/:id", VisitorLive.PersonalDetails
     live "/your_bookings/:id", VisitorLive.YourBookings
     live "/edit_your_bookings/:id", VisitorLive.EditPersonalDetails
+    live "/self_form_booking/:id", VisitorLive.SelfBookingForm
+
   end
 
   # Other scopes may use custom stacks.

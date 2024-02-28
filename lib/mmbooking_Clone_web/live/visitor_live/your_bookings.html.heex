@@ -1,3 +1,10 @@
+<.link href={~p"/self_form_booking/#{@id}"}>
+    <.button>
+      New Booking
+    </.button>
+</.link>
+
+  
   <.table id="visitors" rows={@visitor}>
     <:col :let={visitor} label="Date"> <%= visitor.preferred_date%> </:col>
     <:col label="Status"> <%= @status %></:col>
