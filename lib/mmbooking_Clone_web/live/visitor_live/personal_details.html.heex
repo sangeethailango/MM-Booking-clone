@@ -36,8 +36,20 @@
     <span class="pl-4"><%= @city %></span>
   </div>
 
-  <.link href={~p"/edit_your_bookings/#{@id}"}>
+  <.link href={~p"/your_bookings/#{@id}"}>
+    <.button>
+      Bookings
+    </.button>
+  </.link>
+
+   <.link href={~p"/edit_your_bookings/#{@id}"}>
     <.button>
       Edit
     </.button>
-  </.link>  
+  </.link>    
+
+  <.link href={~p"/visitor_home/#{@id}"}>
+    <.button>
+      Home
+    </.button>
+  </.link>    
