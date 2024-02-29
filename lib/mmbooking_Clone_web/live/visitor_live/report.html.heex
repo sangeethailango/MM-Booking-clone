@@ -1,5 +1,5 @@
 
-<div class="font-bold">Submission Successful</div>
+<h1 class="font-bold">Submission Successful</h1>
 <div class=" text-gray-600 pb-6">
   <p class="py-3" >
     Your request for booking has been successfully submitted.
@@ -11,12 +11,21 @@
     Your request for booking will be processed within 72 hours.  
     If you do not receive an email confirmation, you can wite to us at mmconcentration@auroville.org.in.
   </p>
-  <p class="py-3">
+  <p class="py-3 font-bold">
     NOTE: Submission of booking request does not guarantee a Confirmed booking.
     Bookings are confirmed as per the availability of seats at the time of processing the requests.
   </p>
 </div>
 
-<.link href={~p"/visitor_form/#{@email_id}"}>
-  <.button>Add Family Member</.button>    
-</.link>
+<div class="grid grid-cols-2 ">
+  <.link href={~p"/visitor_form/#{@email_id}"} class="text-blue-500">
+    <u>Add Family Member</u>    
+  </.link>
+ <div class="text-right"> 
+  <.link href={~p"/visitor_home/#{@id}"} >
+      <.button>
+        Home
+      </.button>
+  </.link>
+ </div>
+</div>
