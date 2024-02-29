@@ -1,9 +1,11 @@
 <%= if @form == "one" do %>
-    <p  class="font-bold">New Visitor Form</p>
+    <p  class="font-bold text-2xl text-center">New Visitor Form</p>
       <.simple_form :let={form} for={%{}} phx-change="repeat_visitor-change" phx-submit="visitor-form-submit">
-        <div > 
+        <div class="grid grid-cols-2"> 
           <p class="font-semibold pb-4"> Email ID </p>
-          <%=@email_id %>
+          <div class="">
+            <%=@email_id %>
+          </div>
         </div>
         <.input
           field={form[:first_name]}
@@ -68,12 +70,13 @@
           
           />
         <% end %>
-        <.button >next</.button>
-
+        <div class="text-right">
+          <.button >next</.button>
+        </div>
       </.simple_form>
 <% end %>
 <%= if @form == "two" do %>
-    <p class="font-bold">New Booking Form</p>
+    <p class="font-bold text-2xl text-center">New Booking Form</p>
     <.simple_form :let={form} for={%{}} phx-change="booking-form-validation-change" phx-submit="booking-form-submit">
       <.input
         field={form[:preferred_date]}
@@ -127,13 +130,14 @@
         label="Notes"
         value={@notes}
         />
-      <.button >next</.button>
-
+      <div class="text-right">  
+        <.button >next</.button>
+      </div>
     </.simple_form>
 <% end %>
 <%= if @form == "three" do %>
 
-      <p class="font-bold">Verify Details</p>
+      <p class="font-bold text-2xl pb-6">Verify Details</p>
       <div class="grid grid-cols-2">  
         <div>
           <p class="font-normal pt-4 ">First Name: </p>

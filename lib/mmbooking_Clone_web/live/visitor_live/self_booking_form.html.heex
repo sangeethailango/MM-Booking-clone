@@ -1,9 +1,9 @@
-  <p>Self Booking Form</p>
+  <p class="font-bold text-2xl text-center">Self Booking Form</p>
   <div>
     <.simple_form :let={form} for={%{}}  phx-submit="submit">
-      <div>
+      <div class="grid grid-cols-2">
         <p class="font-bold">First Name</p>
-        <p><%= @first_name %></p>
+        <p><%= @first_name %> <%= @last_name %></p>
       </div>
       <.input
         field={form[:preferred_date]}
@@ -58,7 +58,8 @@
         maxlength="100"
         required
         />
-
-        <.button phx-disable-with="Saving..." value="submit">Submit</.button>
+        <div class="text-right">
+          <.button phx-disable-with="Saving..." value="submit">Submit</.button>
+        </div>
     </.simple_form>
   </div>
