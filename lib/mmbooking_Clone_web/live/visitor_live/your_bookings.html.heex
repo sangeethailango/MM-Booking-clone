@@ -1,0 +1,27 @@
+  <div class="text-right">
+    <.link href={~p"/self_form_booking/#{@id}"} >
+        <.button >
+          New Booking
+        </.button>
+    </.link>
+  </div>
+  
+  <div>
+    <p class="font-bold text-lg ">Full Name</p>
+    <p class="pt-4"> <%= @first_name %> <%=   @last_name %> </p>
+  </div>
+
+  <p class="font-bold text-lg pt-8">Your Bookings</p>
+
+  <.table id="visitors" rows={@visitor}>
+    <:col :let={visitor} label="Date"> <%= visitor.preferred_date%> </:col>
+    <:col label="Status"> <%= @status %></:col>
+  </.table>
+
+  <div class="pt-10">
+    <.link href={~p"/visitor_home/#{@id}"} >
+        <.button>
+          Home
+        </.button>
+    </.link>
+  </div>

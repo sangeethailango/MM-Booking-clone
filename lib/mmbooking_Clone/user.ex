@@ -1,24 +1,44 @@
 defmodule Mmbooking_Clone.User do
 
+  import Ecto.Query
   alias Mmbooking_Clone.User.Visitor
   alias Mmbooking_Clone.Repo
+
 
   def list_all_visitor() do
     Repo.all(Visitor)
   end
 
-  # def insert_new_visitor(user_details) do
-  #   Repo.insert!(%Visitor{}, user_details)
-  # end
-
-  def insert_new_visitor(user_details) do
+  def insert_new_visitor(visitor_details) do
     %Visitor{}
-    |> Visitor.changeset(user_details)
+    |> Visitor.changeset(visitor_details)
     |> Repo.insert!()
+  end
+
+  def update_visitor(%Visitor{} = visitor, visitor_details) do
+    visitor
+    |> Visitor.changeset(visitor_details)
+    |> Repo.update()
   end
 
   def get_visitor_by_id(id) do
     Repo.get(Visitor, id)
+  end
+
+  def family_members(email_id) do
+    query =
+      from v in Visitor,
+      where: v.email_id == ^email_id
+
+    Repo.all(query)
+  end
+
+  def status(visitor) do
+    if Date.compare(visitor.preferred_date, Date.utc_today) == :gt do
+      "Request Sent"
+    else
+      nil
+    end
   end
 
   def list_of_countries() do
