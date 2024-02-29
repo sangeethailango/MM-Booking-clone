@@ -19,7 +19,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.Welcome do
     id = List.first(family_members)
 
     case params["agree"] do
-      true ->
+      "true" ->
         if params["email_id"] in emails do
           {:noreply,
           socket
@@ -31,7 +31,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.Welcome do
           |> push_navigate(to: ~p"/visitor_form/#{params["email_id"]}")
           }
         end
-      false ->
+      "false" ->
         {:noreply,
         socket
         |> assign(email_id: params["email_id"])

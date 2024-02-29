@@ -5,17 +5,26 @@ defmodule Mmbooking_CloneWeb.VisitorLive.EditPersonalDetailsComponent do
   def render(assigns) do
     ~H"""
     <div>
+      <div class="grid grid-cols-2">
+        <p class="font-bold">Change Personal Details</p>
+        <div class="text-right">
+            <.link href={~p"/personal_details/#{@id}"}>
+              <.button>Cancel</.button>
+            </.link>
+        </div>
+      </div>
+
       <.simple_form :let={form} for={%{}} phx-target={@myself} phx-submit="submit">
-        <div>
-          <p>Email ID</p>
+        <div class="grid grid-cols-2 ">
+          <p class="font-medium text-sm">Email ID</p>
           <p><%= @email_id %></p>
         </div>
-        <div>
-          <p>First Name</p>
-          <p><%= @first_name %></p>
+        <div class="grid grid-cols-2 ">
+          <p class="font-medium text-sm">First Name</p>
+          <p > <%= @first_name %> <%=   @last_name %> </p>
         </div>
-        <div>
-          <p>Date OF Birth</p>
+        <div class="grid grid-cols-2 ">
+          <p class="font-medium text-sm">Date OF Birth</p>
           <p><%= @dob %></p>
         </div>
         <.input
@@ -42,12 +51,10 @@ defmodule Mmbooking_CloneWeb.VisitorLive.EditPersonalDetailsComponent do
           maxlength="30"
           required
           />
-          <.button phx-disable-with="Saving..." value="submit">Submit</.button>
+          <div class="text-right ">
+            <.button phx-disable-with="Saving..." value="submit">Save</.button>
+          </div>
       </.simple_form>
-      <.link href={~p"/personal_details/#{@id}"}>
-        <.button>Cancel</.button>
-      </.link>
-
     </div>
     """
   end

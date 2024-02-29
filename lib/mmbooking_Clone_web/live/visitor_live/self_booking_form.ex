@@ -7,6 +7,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.SelfBookingForm do
     {:ok,
     socket
     |> assign(first_name: visitor.first_name)
+    |> assign(last_name: visitor.last_name)
     |> assign(preferred_date: visitor.preferred_date)
     |> assign(place_of_stay: visitor.place_of_stay)
     |> assign(arrival_date: visitor.arrival_date)
