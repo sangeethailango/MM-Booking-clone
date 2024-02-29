@@ -37,7 +37,7 @@ defmodule Mmbooking_Clone.User do
     if Date.compare(visitor.preferred_date, Date.utc_today) == :gt do
       "Request Sent"
     else
-      nil
+      "Expired"
     end
   end
 

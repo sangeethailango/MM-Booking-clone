@@ -13,6 +13,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.SelfBookingForm do
     |> assign(arrival_date: visitor.arrival_date)
     |> assign(departure_date: visitor.departure_date)
     |> assign(notes: visitor.notes)
+    |> assign(alternate_date_of_visit: visitor.alternate_date_of_visit)
     |> assign(date_validation: nil)
     |> assign(visitor: visitor)
     }

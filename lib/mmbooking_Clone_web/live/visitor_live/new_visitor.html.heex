@@ -1,5 +1,5 @@
 <%= if @form == "one" do %>
-    <p  class="font-bold text-2xl text-center">New Visitor Form</p>
+    <h1  class="font-bold text-2xl text-center">New Visitor Form</h1>
       <.simple_form :let={form} for={%{}} phx-change="repeat_visitor-change" phx-submit="visitor-form-submit">
         <div class="grid grid-cols-2"> 
           <p class="font-semibold pb-4"> Email ID </p>
@@ -22,7 +22,6 @@
           maxlength="20"
           value={@last_name}
           required
-
           />
         <.input
           field={form[:dob]}
@@ -30,7 +29,6 @@
           label="Date Of Birth"
           value={@dob}
           required
-          
           />
         <.input
           field={form[:country]}
@@ -40,7 +38,6 @@
           prompt="Select your country"
           value={@country}
           required
-
           />
         <.input
           field={form[:city]}
@@ -49,7 +46,6 @@
           maxlength="30"
           value={@city}
           required
-          
           />
         <.input
           field={form[:have_you_visited_inner_chamber]}
@@ -58,7 +54,6 @@
           options = {["Yes", "No"]}
           label="Have you visited the inner chamber in the past?"
           required
-          
           />
         <%= if @repeat_visitor == "Yes" do %>  
         <.input
@@ -66,8 +61,6 @@
           type="text"
           label="If YES, enter the date of your last visit"
           maxlength="30"
-          required
-          
           />
         <% end %>
         <div class="text-right">
@@ -76,7 +69,7 @@
       </.simple_form>
 <% end %>
 <%= if @form == "two" do %>
-    <p class="font-bold text-2xl text-center">New Booking Form</p>
+    <h1 class="font-bold text-2xl text-center">New Booking Form</h1>
     <.simple_form :let={form} for={%{}} phx-change="booking-form-validation-change" phx-submit="booking-form-submit">
       <.input
         field={form[:preferred_date]}
@@ -94,7 +87,7 @@
       <.input
         field={form[:alternate_date_of_visit]}
         type="date"
-        label="Alternate Date of visit(optional)"
+        label="Alternate Date of visit  (optional)"
         value={@alternate_date_of_visit}
         />
       <%= if @date_validation == "alt date of visit is greater than dep date" do%>
@@ -103,12 +96,13 @@
       <.input
         field={form[:place_of_stay]}
         type="text"
-        label="Staying At(In or Around Auroville)"
+        label="Staying At  (In or Around Auroville)"
         value={@place_of_stay}
         />
       <.input
         field={form[:arrival_date]}
         type="date"
+        
         label="Arrival Date"
         value={@arrival_date}
         />
@@ -126,7 +120,7 @@
       <% end %>
       <.input
         field={form[:notes]}
-        type="text"
+        type="textarea"
         label="Notes"
         value={@notes}
         />
@@ -137,9 +131,10 @@
 <% end %>
 <%= if @form == "three" do %>
 
-      <p class="font-bold text-2xl pb-6">Verify Details</p>
+      <h1 class="font-bold text-2xl pb-6">Verify Details</h1>
       <div class="grid grid-cols-2">  
         <div>
+          <p class="font-normal pt-4 ">Email ID:</p>  
           <p class="font-normal pt-4 ">First Name: </p>
           <p class="font-normal pt-4 ">last Name:</p>
           <p class="font-normal pt-4 ">Date Of Birth:</p>
@@ -152,26 +147,34 @@
           <p class="font-normal pt-4 ">Arrival Date:</p>
           <p class="font-normal pt-4 ">Departure Date:</p>
           <p class="font-normal pt-4 ">Notes:</p>
-          <p class="font-normal pt-4 ">Email ID:</p>  
         </div>
         <div>
-        <p class="pt-4"  >
+        <p class="pt-4" >
+        <%= @email_id%>
+        </p>
+        <p class="pt-4 uppercase"  >
         <%= @first_name  %>
         </p>
-        <p class="pt-4" >
+        <p class="pt-4 uppercase" >
         <%= @last_name%>
         </p>
-        <p class="pt-4" >
+        <p class="pt-4 uppercase" >
+        <%= @place_of_stay%>
+        </p>
+        <p class="pt-4 uppercase" >
+        <%= @city%>
+        </p>
+        <p class="pt-4 " >
         <%= @dob%>
         </p>
         <p class="pt-4" >
         <%= @country%>
         </p>
         <p class="pt-4" >
-        <%= @city%>
+        <%= @have_you_visited_inner_chamber%>
         </p>
         <p class="pt-4" >
-        <%= @have_you_visited_inner_chamber%>
+        <%= @arrival_date%>
         </p>
         <p class="pt-4" >
         <%= @preferred_date%>
@@ -180,19 +183,10 @@
         <%= @alternate_date%>
         </p>
         <p class="pt-4" >
-        <%= @place_of_stay%>
-        </p>
-        <p class="pt-4" >
-        <%= @arrival_date%>
-        </p>
-        <p class="pt-4" >
         <%= @departure_date%>
         </p>
         <p class="pt-4" >
         <%= @notes%>
-        </p>
-        <p class="pt-4" >
-        <%= @email_id%>
         </p>
         </div>
       </div>  

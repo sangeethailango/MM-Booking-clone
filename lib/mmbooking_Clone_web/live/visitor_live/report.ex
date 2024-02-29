@@ -8,6 +8,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.Report do
     {:ok,
     socket
     |> assign(email_id: visitor.email_id )
-   }
+    |> assign(id: visitor.id )
+  }
   end
 end

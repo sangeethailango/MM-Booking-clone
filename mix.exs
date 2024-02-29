@@ -19,7 +19,7 @@ defmodule Mmbooking_Clone.MixProject do
   def application do
     [
       mod: {Mmbooking_Clone.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools],
     ]
   end
 
@@ -51,6 +51,7 @@ defmodule Mmbooking_Clone.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
+      {:timex, "~> 3.0"},
     ]
   end
 

@@ -1,3 +1,15 @@
+
+<div class="grid grid-cols-2 pb-6">
+  <p class="font-bold text-lg ">Your Bookings</p>
+  <div class="text-right">
+    <.link href={~p"/self_form_booking/#{@id}"} >
+        <.button >
+          New Booking
+        </.button>
+    </.link>
+   </div> 
+</div>
+
   <div class="grid grid-cols-3">
     <div>
         <p class="font-bold text-lg inline-block">Full Name</p>
@@ -5,17 +17,7 @@
     <div>
         <p > <%= @first_name %> <%=   @last_name %> </p>
     </div>
-   <div class="text-right">
-    <.link href={~p"/self_form_booking/#{@id}"} >
-        <.button >
-          New Booking
-        </.button>
-    </.link>
-   </div> 
   </div>
-  
-
-  <p class="font-bold text-lg pt-8">Your Bookings</p>
 
   <.table id="visitors" rows={@visitor}>
     <:col :let={visitor} label="Date"> <%= visitor.preferred_date%> </:col>
