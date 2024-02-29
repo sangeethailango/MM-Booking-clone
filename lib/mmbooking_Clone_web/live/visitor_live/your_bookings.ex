@@ -10,6 +10,8 @@ defmodule Mmbooking_CloneWeb.VisitorLive.YourBookings do
     {:ok,
     socket
     |> assign(visitor: [visitor])
+    |> assign(first_name: visitor.first_name)
+    |> assign(last_name: visitor.last_name)
     |> assign(status: status)
     |> assign(id: visitor.id)
     }

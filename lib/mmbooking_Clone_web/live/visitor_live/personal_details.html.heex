@@ -1,4 +1,4 @@
-<p><b>Personal Details</b></p>
+<p class=" text-lg font-bold">Personal Details</p>
 
   <.simple_form :let={form} for={%{}} phx-change="visitor-name-change">
     <.input
@@ -10,51 +10,47 @@
       required
       />
   </.simple_form>    
+  <div class="grid grid-cols-2 leading-10 py-6">
+    <div>
+      <p class="font-medium">First Name:</p> 
+      <p class="font-medium">Last Name:</p> 
+      <p class="font-medium">Date Of Birth:</p> 
+      <p class="font-medium">Email ID:</p> 
+      <p class="font-medium">Country:</p> 
+      <p class="font-medium">City:</p> 
 
-  <div>
-    <span>First Name</span> 
-    <span class="pl-4"><%= @first_name %></span>
-  </div>
-  <div>
-    <span>Last Name</span> 
-    <span class="pl-4"><%= @last_name %></span>
-  </div>
-  <div>
-    <span>Date Of Birth</span> 
-    <span class="pl-4"><%= @dob %></span>
-  </div>
-  <div>
-    <span>Email ID</span> 
-    <span class="pl-4"><%= @email_id %></span>
-  </div>
-  <div>
-    <span>Country</span> 
-    <span class="pl-4"><%= @country %></span>
-  </div>
-  <div>
-    <span>City</span> 
-    <span class="pl-4"><%= @city %></span>
+    </div>
+    <div>
+      <p class="pl-4"><%= @first_name %></p>
+      <p class="pl-4"><%= @last_name %></p>
+      <p class="pl-4"><%= @dob %></p>
+      <p class="pl-4"><%= @email_id %></p>
+      <p class="pl-4"><%= @country %></p>
+      <p class="pl-4"><%= @city %></p>
+    </div>  
   </div>
 
-  <.link href={~p"/your_bookings/#{@id}"}>
-    <.button>
-      Bookings
-    </.button>
-  </.link>
-
-   <.link href={~p"/edit_personal_details/#{@id}"}>
-    <.button>
-      Edit
-    </.button>
-  </.link>    
-
-  <.link href={~p"/visitor_home/#{@id}"}>
-    <.button>
-      Home
-    </.button>
-  </.link>    
-
-
+<div class="grid grid-cols-2 pt-4">
+  <div>
+    <.link href={~p"/your_bookings/#{@id}"}>
+      <.button>
+        Bookings
+      </.button>
+    </.link>
+    <.link href={~p"/visitor_home/#{@id}"}>
+      <.button>
+        Home
+      </.button>
+    </.link>    
+  </div>
+  <div class="text-right">
+  <.link href={~p"/edit_personal_details/#{@id}"}>
+      <.button>
+        Edit
+      </.button>
+    </.link>    
+  </div>
+</div>
 <.modal 
   :if={@live_action in [:edit]}
   id = "Edit"

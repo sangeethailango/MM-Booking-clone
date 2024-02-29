@@ -19,8 +19,6 @@ defmodule Mmbooking_CloneWeb.VisitorLive.SelfBookingForm do
 
   def handle_event("submit", visitor_params, socket) do
 
-    IO.inspect(visitor_params, label: "Visitor Params")
-
     date_validation = cond do
       visitor_params["preferred_date"] == visitor_params["arrival_date"] -> "pref date and arr date is same"
       visitor_params["preferred_date"] > visitor_params["departure_date"] -> "pref date is greater than dep date"

@@ -18,7 +18,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.Welcome do
     family_members = User.family_members(params["email_id"])
     id = List.first(family_members)
 
-    case params["agree"] == "true" do
+    case params["agree"] do
       true ->
         if params["email_id"] in emails do
           {:noreply,
