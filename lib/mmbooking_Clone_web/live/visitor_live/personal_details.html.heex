@@ -24,7 +24,7 @@
       <p class="pl-4 uppercase"><%= @first_name %></p>
       <p class="pl-4 uppercase"><%= @last_name %></p>
       <p class="pl-4 uppercase"><%= @city %></p>
-      <p class="pl-4"><%= @dob %></p>
+      <p class="pl-4"><%= Timex.format!(@dob, "{D}-{M}-{YYYY}") %></p>
       <p class="pl-4"><%= @email_id %></p>
       <p class="pl-4"><%= @country %></p>
     </div>  
