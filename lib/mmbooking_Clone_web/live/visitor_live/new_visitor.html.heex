@@ -138,13 +138,13 @@
           <p class="font-normal pt-4 ">First Name: </p>
           <p class="font-normal pt-4 ">last Name:</p>
           <p class="font-normal pt-4 ">Date Of Birth:</p>
-          <p class="font-normal pt-4 ">Country:</p>
+          <p class="font-normal pt-4 ">Staying At:</p>
           <p class="font-normal pt-4 ">City:</p>
+          <p class="font-normal pt-4 ">Country:</p>
           <p class="font-normal pt-4 ">Have You Visited Inner Chamber Before?</p>
+          <p class="font-normal pt-4 ">Arrival Date:</p>
           <p class="font-normal pt-4 ">Preferred Date:</p>
           <p class="font-normal pt-4 ">Alternate Date:</p>
-          <p class="font-normal pt-4 ">Staying At:</p>
-          <p class="font-normal pt-4 ">Arrival Date:</p>
           <p class="font-normal pt-4 ">Departure Date:</p>
           <p class="font-normal pt-4 ">Notes:</p>
         </div>
@@ -158,14 +158,14 @@
         <p class="pt-4 uppercase" >
         <%= @last_name%>
         </p>
+        <p class="pt-4 " >
+        <%= User.date_format(@dob)%>
+        </p>
         <p class="pt-4 uppercase" >
         <%= @place_of_stay%>
         </p>
         <p class="pt-4 uppercase" >
         <%= @city%>
-        </p>
-        <p class="pt-4 " >
-        <%= @dob%>
         </p>
         <p class="pt-4" >
         <%= @country%>
@@ -174,16 +174,16 @@
         <%= @have_you_visited_inner_chamber%>
         </p>
         <p class="pt-4" >
-        <%= @arrival_date%>
+        <%= User.date_format(@arrival_date)%>
         </p>
         <p class="pt-4" >
-        <%= @preferred_date%>
+        <%= User.date_format(@preferred_date) %>
         </p>
         <p class="pt-4" >
-        <%= @alternate_date_of_visit%>
+        <%= User.date_format(@alternate_date_of_visit)%>
         </p>
         <p class="pt-4" >
-        <%= @departure_date%>
+        <%= User.date_format(@departure_date) %>
         </p>
         <p class="pt-4" >
         <%= @notes%>
