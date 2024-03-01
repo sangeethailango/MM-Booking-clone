@@ -1,26 +1,26 @@
 
-<div class="grid grid-cols-2 pb-6">
-  <p class="font-bold text-lg ">Your Bookings</p>
-  <div class="text-right">
-    <.link href={~p"/self_form_booking/#{@id}"} >
-        <.button >
-          New Booking
-        </.button>
-    </.link>
-   </div> 
-</div>
+  <div class="grid grid-cols-2 pb-6">
+    <p class="font-bold text-lg ">Your Bookings</p>
+    <div class="text-right">
+      <.link href={~p"/self_form_booking/#{@id}"} >
+          <.button >
+            New Booking
+          </.button>
+      </.link>
+    </div> 
+  </div>
 
   <div class="grid grid-cols-3">
     <div>
-        <p class="font-bold text-lg inline-block">Full Name</p>
+      <p class="font-bold text-lg inline-block">Full Name</p>
     </div>
     <div>
-        <p > <%= @first_name %> <%=   @last_name %> </p>
+      <p > <%= @first_name %> <%=   @last_name %> </p>
     </div>
   </div>
 
   <.table id="visitors" rows={@visitor}>
-    <:col :let={visitor} label="Date"> <%= visitor.preferred_date%> </:col>
+    <:col :let={visitor} label="Date"> <%= Timex.format!(visitor.preferred_date, "{D}-{M}-{YYYY}") %> </:col>
     <:col label="Status"> <%= @status %></:col>
   </.table>
 
