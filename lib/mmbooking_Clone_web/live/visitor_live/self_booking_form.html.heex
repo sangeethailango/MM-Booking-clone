@@ -5,7 +5,7 @@
         <p class="font-bold">First Name</p>
         <p><%= @first_name %> <%= @last_name %></p>
       </div>
-      <.input
+      <.modified_input
         field={form[:preferred_date]}
         type="date"
         value={@preferred_date}
@@ -13,15 +13,16 @@
         min = {Date.add(Date.utc_today, 1)}
         required
         />
-        <.input
+        <.modified_input
         field={form[:alternate_date_of_visit]}
         type="date"
         label="Alternate Date of visit  (optional)"
         value={@alternate_date_of_visit}
         min = {Date.add(Date.utc_today, 1)}
+        required
         />
 
-        <.input
+        <.modified_input
         field={form[:place_of_stay]}
         type="text"
         label="Place Of Stay"
@@ -29,7 +30,7 @@
         maxlength="30"
         required
         />
-        <.input
+        <.modified_input
         field={form[:arrival_date]}
         type="date"
         label="Arrival Date"
@@ -43,7 +44,7 @@
           <p class="text-red-900">Sorry! Visit on the same day as your Arrival Date in or around Auroville is not permitted.</p>
         <% end %>
 
-        <.input
+        <.modified_input
         field={form[:departure_date]}
         type="date"
         value={@departure_date}
@@ -66,7 +67,6 @@
         value={@notes}
         label="Additional Notes"
         maxlength="100"
-        required
         />
         <div class="text-right">
           <.button phx-disable-with="Saving..." value="submit">Submit</.button>

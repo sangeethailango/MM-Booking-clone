@@ -19,7 +19,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.EditPersonalDetailsComponent do
           <p class="font-medium text-sm">Date OF Birth</p>
           <p><%= Timex.format!(@dob, "{D}-{M}-{YYYY}") %></p>
         </div>
-        <.input
+        <.modified_input
           field={form[:last_name]}
           type="text"
           value={@last_name}
@@ -27,7 +27,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.EditPersonalDetailsComponent do
           maxlength="20"
           required
           />
-          <.input
+          <.modified_input
           field={form[:country]}
           type="select"
           label="Country"
@@ -35,7 +35,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.EditPersonalDetailsComponent do
           value={@country}
           required
           />
-          <.input
+          <.modified_input
           field={form[:city]}
           type="text"
           label="City"
