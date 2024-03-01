@@ -33,6 +33,11 @@ defmodule Mmbooking_Clone.User do
     Repo.all(query)
   end
 
+  def date_format(date) do
+    date = Date.from_iso8601!(date)
+    Timex.format!(date, "{D}-{M}-{YYYY}")
+  end
+
   def status(visitor) do
     if Date.compare(visitor.preferred_date, Date.utc_today) == :gt do
       "Request Sent"
