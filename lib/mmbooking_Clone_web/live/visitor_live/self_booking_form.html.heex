@@ -10,6 +10,7 @@
         type="date"
         value={@preferred_date}
         label="Preferred Date"
+        min = {Date.add(Date.utc_today, 1)}
         required
         />
         <.input
@@ -17,6 +18,7 @@
         type="date"
         label="Alternate Date of visit  (optional)"
         value={@alternate_date_of_visit}
+        min = {Date.add(Date.utc_today, 1)}
         />
 
         <.input
