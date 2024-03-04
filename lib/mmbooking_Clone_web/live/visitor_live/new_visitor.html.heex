@@ -30,7 +30,6 @@
           value={@dob}
           required
           />
-
           <%= if @kid == true  do %>
             <p class="text-red-900">Sorry! Children below 10 years of age are Not permitted inside the Matrimandir Inner Chamber</p>               
           <% end %> 
@@ -56,6 +55,7 @@
           type="select"
           prompt="Select One"
           options = {["Yes", "No"]}
+          value = {@have_you_visited_inner_chamber}
           label="Have you visited the inner chamber in the past?"
           required
           />
@@ -132,73 +132,78 @@
         value={@notes}
         />
       <div class="text-right">  
-        <.button >next</.button>
+        <.button name="button" value="back">back</.button>
+        <.button name="button" value="next">next</.button>
       </div>
     </.simple_form>
 <% end %>
 <%= if @form == "three" do %>
-
+     
       <h1 class="font-bold text-2xl pb-6">Verify Details</h1>
-      <div class="grid grid-cols-2">  
-        <div>
-          <p class="font-normal pt-4 ">Email ID:</p>  
-          <p class="font-normal pt-4 ">First Name: </p>
-          <p class="font-normal pt-4 ">last Name:</p>
-          <p class="font-normal pt-4 ">Date Of Birth:</p>
-          <p class="font-normal pt-4 ">Staying At:</p>
-          <p class="font-normal pt-4 ">City:</p>
-          <p class="font-normal pt-4 ">Country:</p>
-          <p class="font-normal pt-4 ">Have You Visited Inner Chamber Before?</p>
-          <p class="font-normal pt-4 ">Arrival Date:</p>
-          <p class="font-normal pt-4 ">Preferred Date:</p>
-          <p class="font-normal pt-4 ">Alternate Date:</p>
-          <p class="font-normal pt-4 ">Departure Date:</p>
-          <p class="font-normal pt-4 ">Notes:</p>
+      <.form for={%{}} phx-change="verify_details_change" phx-submit="save" >
+
+        <div class="grid grid-cols-2">  
+          <div>
+            <p class="font-normal pt-4 ">Email ID:</p>  
+            <p class="font-normal pt-4 ">First Name: </p>
+            <p class="font-normal pt-4 ">last Name:</p>
+            <p class="font-normal pt-4 ">Date Of Birth:</p>
+            <p class="font-normal pt-4 ">Staying At:</p>
+            <p class="font-normal pt-4 ">City:</p>
+            <p class="font-normal pt-4 ">Country:</p>
+            <p class="font-normal pt-4 ">Have You Visited Inner Chamber Before?</p>
+            <p class="font-normal pt-4 ">Arrival Date:</p>
+            <p class="font-normal pt-4 ">Preferred Date:</p>
+            <p class="font-normal pt-4 ">Alternate Date:</p>
+            <p class="font-normal pt-4 ">Departure Date:</p>
+            <p class="font-normal pt-4 ">Notes:</p>
+          </div>
+          <div>
+          <p class="pt-4" >
+            <%= @email_id%>
+          </p>
+          <p class="pt-4 uppercase"  >
+            <%= @first_name  %>
+          </p>
+          <p class="pt-4 uppercase" >
+            <%= @last_name%>
+          </p>
+          <p class="pt-4 " >
+            <%= User.date_format(@dob)%>
+          </p>
+          <p class="pt-4 uppercase" >
+            <%= @place_of_stay%>
+          </p>
+          <p class="pt-4 uppercase" >
+            <%= @city%>
+          </p>
+          <p class="pt-4" >
+            <%= @country%>
+          </p>
+          <p class="pt-4" >
+            <%= @have_you_visited_inner_chamber%>
+          </p>
+          <p class="pt-4" >
+            <%= User.date_format(@arrival_date)%>
+          </p>
+          <p class="pt-4" >
+            <%= User.date_format(@preferred_date) %>
+          </p>
+          <p class="pt-4" >
+            <%= User.date_format(@alternate_date_of_visit)%>
+          </p>
+          <p class="pt-4" >
+            <%= User.date_format(@departure_date) %>
+          </p>
+          <p class="pt-4" >
+            <%= @notes%>
+          </p>
+          </div>
+        </div>  
+        <div class="pt-8">
+          <.button name="button" value="back">back</.button>
+          <.button name="button" value="next">Submit</.button>
         </div>
-        <div>
-        <p class="pt-4" >
-        <%= @email_id%>
-        </p>
-        <p class="pt-4 uppercase"  >
-        <%= @first_name  %>
-        </p>
-        <p class="pt-4 uppercase" >
-        <%= @last_name%>
-        </p>
-        <p class="pt-4 " >
-        <%= User.date_format(@dob)%>
-        </p>
-        <p class="pt-4 uppercase" >
-        <%= @place_of_stay%>
-        </p>
-        <p class="pt-4 uppercase" >
-        <%= @city%>
-        </p>
-        <p class="pt-4" >
-        <%= @country%>
-        </p>
-        <p class="pt-4" >
-        <%= @have_you_visited_inner_chamber%>
-        </p>
-        <p class="pt-4" >
-        <%= User.date_format(@arrival_date)%>
-        </p>
-        <p class="pt-4" >
-        <%= User.date_format(@preferred_date) %>
-        </p>
-        <p class="pt-4" >
-        <%= User.date_format(@alternate_date_of_visit)%>
-        </p>
-        <p class="pt-4" >
-        <%= User.date_format(@departure_date) %>
-        </p>
-        <p class="pt-4" >
-        <%= @notes%>
-        </p>
-        </div>
-      </div>  
-      <div class="pt-8">
-        <.button phx-click="save">Submit</.button>
-      </div>
+      </.form>
 <% end %>
 
