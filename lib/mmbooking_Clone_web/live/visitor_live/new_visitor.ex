@@ -62,8 +62,6 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
 
   def handle_event("booking-form-submit", params, socket) do
 
-
-
     date_validation = cond do
       params["preferred_date"] == params["arrival_date"] -> "pref date and arr date is same"
       params["preferred_date"] > params["departure_date"] -> "pref date is greater than dep date"
@@ -132,8 +130,6 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     {:last_name, socket.assigns.last_name },{:notes, socket.assigns.notes },{:place_of_stay, socket.assigns.place_of_stay },{:preferred_date, socket.assigns.preferred_date},{:last_date_of_visit, socket.assigns.last_date_of_visit}])
 
     visitor = User.insert_new_visitor(visitor_detail)
-
-    IO.inspect(visitor, label: "Visitor")
 
     AcknowledgementEmail.welcome(visitor_detail.email_id)
 
