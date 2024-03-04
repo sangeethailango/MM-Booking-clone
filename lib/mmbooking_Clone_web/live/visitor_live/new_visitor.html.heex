@@ -7,7 +7,7 @@
             <%=@email_id %>
           </div>
         </div>
-        <.input
+        <.modified_input
           field={form[:first_name]}
           type="text"
           label="First Name"
@@ -15,7 +15,7 @@
           value={@first_name}
           required
           />
-        <.input
+        <.modified_input
           field={form[:last_name]}
           type="text"
           label="Last Name"
@@ -23,14 +23,14 @@
           value={@last_name}
           required
           />
-        <.input
+        <.modified_input
           field={form[:dob]}
           type="date"
           label="Date Of Birth"
           value={@dob}
           required
           />
-        <.input
+        <.modified_input
           field={form[:country]}
           type="select"
           label="Country"
@@ -39,7 +39,7 @@
           value={@country}
           required
           />
-        <.input
+        <.modified_input
           field={form[:city]}
           type="text"
           label="City"
@@ -47,7 +47,7 @@
           value={@city}
           required
           />
-        <.input
+        <.modified_input
           field={form[:have_you_visited_inner_chamber]}
           type="select"
           prompt="Select One"
@@ -71,11 +71,12 @@
 <%= if @form == "two" do %>
     <h1 class="font-bold text-2xl text-center">New Booking Form</h1>
     <.simple_form :let={form} for={%{}} phx-change="booking-form-validation-change" phx-submit="booking-form-submit">
-      <.input
+      <.modified_input
         field={form[:preferred_date]}
         type="date"
         label="Select Preferred Date of your visite"
         value={@preferred_date}        
+        required
         />
       <%= if @date_validation == "pref date is greater than dep date" do %>  
        <p class="text-red-900">Sorry! Visit later than your Departure Date is not permitted.</p>   
@@ -93,27 +94,29 @@
       <%= if @date_validation == "alt date of visit is greater than dep date" do%>
       <p class="text-red-900">Sorry! Alternate Date of Visit cannot be greater than Departure Date</p>
       <% end %>
-      <.input
+      <.modified_input
         field={form[:place_of_stay]}
         type="text"
         label="Staying At  (In or Around Auroville)"
         value={@place_of_stay}
+        required
         />
-      <.input
+      <.modified_input
         field={form[:arrival_date]}
         type="date"
-        
         label="Arrival Date"
         value={@arrival_date}
+        required
         />
       <%= if @date_validation == "pref date and arr date is same" do %>    
        <p class="text-red-900">Sorry! Visit on the same day as your Arrival Date in or around Auroville is not permitted.</p>
       <% end %>
-      <.input
+      <.modified_input
         field={form[:departure_date]}
         type="date"
         label="Departure Date"
         value= {@departure_date}
+        required
         />
       <%= if @date_validation == "arr date and dep date are same" do %>      
         <p class="text-red-900">Sorry! Visitors coming for a day visit to Auroville are not permitted</p>  
@@ -138,13 +141,13 @@
           <p class="font-normal pt-4 ">First Name: </p>
           <p class="font-normal pt-4 ">last Name:</p>
           <p class="font-normal pt-4 ">Date Of Birth:</p>
-          <p class="font-normal pt-4 ">Country:</p>
+          <p class="font-normal pt-4 ">Staying At:</p>
           <p class="font-normal pt-4 ">City:</p>
+          <p class="font-normal pt-4 ">Country:</p>
           <p class="font-normal pt-4 ">Have You Visited Inner Chamber Before?</p>
+          <p class="font-normal pt-4 ">Arrival Date:</p>
           <p class="font-normal pt-4 ">Preferred Date:</p>
           <p class="font-normal pt-4 ">Alternate Date:</p>
-          <p class="font-normal pt-4 ">Staying At:</p>
-          <p class="font-normal pt-4 ">Arrival Date:</p>
           <p class="font-normal pt-4 ">Departure Date:</p>
           <p class="font-normal pt-4 ">Notes:</p>
         </div>
@@ -158,14 +161,14 @@
         <p class="pt-4 uppercase" >
         <%= @last_name%>
         </p>
+        <p class="pt-4 " >
+        <%= User.date_format(@dob)%>
+        </p>
         <p class="pt-4 uppercase" >
         <%= @place_of_stay%>
         </p>
         <p class="pt-4 uppercase" >
         <%= @city%>
-        </p>
-        <p class="pt-4 " >
-        <%= @dob%>
         </p>
         <p class="pt-4" >
         <%= @country%>
@@ -174,16 +177,16 @@
         <%= @have_you_visited_inner_chamber%>
         </p>
         <p class="pt-4" >
-        <%= @arrival_date%>
+        <%= User.date_format(@arrival_date)%>
         </p>
         <p class="pt-4" >
-        <%= @preferred_date%>
+        <%= User.date_format(@preferred_date) %>
         </p>
         <p class="pt-4" >
-        <%= @alternate_date_of_visit%>
+        <%= User.date_format(@alternate_date_of_visit)%>
         </p>
         <p class="pt-4" >
-        <%= @departure_date%>
+        <%= User.date_format(@departure_date) %>
         </p>
         <p class="pt-4" >
         <%= @notes%>

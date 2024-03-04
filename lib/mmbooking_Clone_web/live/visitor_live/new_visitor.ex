@@ -3,7 +3,8 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
 
   alias Mmbooking_Clone.User
   alias Mmbooking_CloneWeb.VisitorLive.AcknowledgementEmail
-  def mount(params, _session, socket) do
+  def mount(_params, session, socket) do
+
     countries = User.list_of_countries()
 
     {:ok,
@@ -23,7 +24,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     |> assign(departure_date: nil)
     |> assign(notes: nil)
     |> assign(date_validation: nil)
-    |> assign(email_id: params["email_id"])
+    |> assign(email_id: session["new_email"])
     |> assign(list_of_countries: countries)
    }
   end
@@ -61,8 +62,6 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
 
   def handle_event("booking-form-submit", params, socket) do
 
-
-
     date_validation = cond do
       params["preferred_date"] == params["arrival_date"] -> "pref date and arr date is same"
       params["preferred_date"] > params["departure_date"] -> "pref date is greater than dep date"
@@ -91,16 +90,16 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     |> assign(date_validation: date_validation)
     |> assign(first_name: socket.assigns.first_name)
     |> assign(last_name: socket.assigns.last_name)
-    |> assign(dob: User.date_format(socket.assigns.dob))
+    |> assign(dob: socket.assigns.dob)
     |> assign(country: socket.assigns.country)
     |> assign(city: socket.assigns.city)
     |> assign(have_you_visited_inner_chamber: have_you_visited_innter_chamber)
     |> assign(last_date_of_visit: socket.assigns.last_date_of_visit)
-    |> assign(preferred_date: User.date_format(params["preferred_date"]))
-    |> assign(alternate_date_of_visit: User.date_format(params["alternate_date_of_visit"]))
+    |> assign(preferred_date: params["preferred_date"])
+    |> assign(alternate_date_of_visit: params["alternate_date_of_visit"])
     |> assign(place_of_stay: params["place_of_stay"])
-    |> assign(arrival_date:  User.date_format(params["arrival_date"]))
-    |> assign(departure_date: User.date_format(params["departure_date"]))
+    |> assign(arrival_date:  params["arrival_date"])
+    |> assign(departure_date: params["departure_date"])
     |> assign(notes: params["notes"])
     }
   end
@@ -125,7 +124,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
       false
     end
 
-    visitor_detail =  Map.new([{:alternate_date_of_visit, socket.assigns.alternate_date },{:arrival_date, socket.assigns.arrival_date},
+    visitor_detail =  Map.new([{:alternate_date_of_visit, socket.assigns.alternate_date_of_visit },{:arrival_date, socket.assigns.arrival_date},
     {:city, socket.assigns. city},{:country, socket.assigns.country},{:departure_date, socket.assigns.departure_date },{:dob, socket.assigns.dob },
     {:email_id, socket.assigns.email_id},{:first_name, socket.assigns.first_name },{:have_you_visited_inner_chamber, have_you_visited_inner_chamber  },
     {:last_name, socket.assigns.last_name },{:notes, socket.assigns.notes },{:place_of_stay, socket.assigns.place_of_stay },{:preferred_date, socket.assigns.preferred_date},{:last_date_of_visit, socket.assigns.last_date_of_visit}])

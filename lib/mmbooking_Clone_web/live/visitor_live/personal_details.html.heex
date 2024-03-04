@@ -4,29 +4,26 @@
     <.input
       field={form[:id]}
       type="select"
-      prompt={@first_name}
-      label="Select Name"
       options={(@family_member_names)}
       required
       />
   </.simple_form>    
   <div class="grid grid-cols-2 leading-10 py-6">
     <div>
+      <p class="font-medium">Email ID:</p> 
       <p class="font-medium">First Name:</p> 
       <p class="font-medium">Last Name:</p> 
       <p class="font-medium">Date Of Birth:</p> 
-      <p class="font-medium">Email ID:</p> 
       <p class="font-medium">Country:</p> 
       <p class="font-medium">City:</p> 
-
     </div>
     <div>
+      <p class="pl-4"><%= @email_id %></p>
       <p class="pl-4 uppercase"><%= @first_name %></p>
       <p class="pl-4 uppercase"><%= @last_name %></p>
-      <p class="pl-4 uppercase"><%= @city %></p>
-      <p class="pl-4"><%= @dob %></p>
-      <p class="pl-4"><%= @email_id %></p>
+      <p class="pl-4"><%= Timex.format!(@dob, "{D}-{M}-{YYYY}") %></p>
       <p class="pl-4"><%= @country %></p>
+      <p class="pl-4 uppercase"><%= @city %></p>
     </div>  
   </div>
 
