@@ -30,6 +30,10 @@
           value={@dob}
           required
           />
+
+          <%= if @kid == true  do %>
+            <p class="text-red-900">Sorry! Children below 10 years of age are Not permitted inside the Matrimandir Inner Chamber</p>               
+          <% end %> 
         <.modified_input
           field={form[:country]}
           type="select"
