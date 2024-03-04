@@ -10,6 +10,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.VisitorHome do
     socket
     |> assign(family_members: family_members)
     |> assign(email_id: visitor.email_id)
+    |> assign(id: visitor.id)
     |> assign(warning: false)
     }
   end
@@ -39,10 +40,9 @@ defmodule Mmbooking_CloneWeb.VisitorLive.VisitorHome do
   end
 
   def handle_event("bookings", _params, socket) do
-    id = String.to_integer(socket.assigns.id)
     {:noreply,
     socket
-    |> push_navigate(to: ~p"/your_bookings/#{id}")
+    |> push_navigate(to: ~p"/your_bookings/#{socket.assigns.id}")
     }
   end
 end

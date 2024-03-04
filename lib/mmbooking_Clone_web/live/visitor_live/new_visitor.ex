@@ -3,7 +3,8 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
 
   alias Mmbooking_Clone.User
   alias Mmbooking_CloneWeb.VisitorLive.AcknowledgementEmail
-  def mount(params, _session, socket) do
+  def mount(_params, session, socket) do
+
     countries = User.list_of_countries()
 
     {:ok,
@@ -23,7 +24,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     |> assign(departure_date: nil)
     |> assign(notes: nil)
     |> assign(date_validation: nil)
-    |> assign(email_id: params["email_id"])
+    |> assign(email_id: session["new_email"])
     |> assign(list_of_countries: countries)
    }
   end
@@ -131,6 +132,8 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     {:last_name, socket.assigns.last_name },{:notes, socket.assigns.notes },{:place_of_stay, socket.assigns.place_of_stay },{:preferred_date, socket.assigns.preferred_date},{:last_date_of_visit, socket.assigns.last_date_of_visit}])
 
     visitor = User.insert_new_visitor(visitor_detail)
+
+    IO.inspect(visitor, label: "Visitor")
 
     AcknowledgementEmail.welcome(visitor_detail.email_id)
 

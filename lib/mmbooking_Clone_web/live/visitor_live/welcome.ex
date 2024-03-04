@@ -3,6 +3,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.Welcome do
 
   alias Mmbooking_Clone.User
 
+
   def mount(_params, _session, socket) do
     {:ok,
     socket
@@ -28,7 +29,8 @@ defmodule Mmbooking_CloneWeb.VisitorLive.Welcome do
         else
           {:noreply,
           socket
-          |> push_navigate(to: ~p"/visitor_form/#{params["email_id"]}")
+          # |> put_session(:key, "value")
+          |> push_navigate(to: ~p"/welcome/new_visitor/#{params["email_id"]}")
           }
         end
       "false" ->

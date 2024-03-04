@@ -2,7 +2,8 @@ defmodule Mmbooking_Clone.Repo.Migrations.CreateVisitors do
   use Ecto.Migration
 
   def change do
-    create table(:visitors) do
+    create table(:visitors, primary_key: false) do
+      add :id, :binary_id, primary_key: true
       add :email_id, :string
       add :first_name, :string
       add :last_name, :string
@@ -20,6 +21,8 @@ defmodule Mmbooking_Clone.Repo.Migrations.CreateVisitors do
 
       timestamps()
     end
+
+    create index(:visitors, [:id])
 
   end
 end
