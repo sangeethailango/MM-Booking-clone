@@ -8,7 +8,6 @@
       <.modified_input
         field={form[:preferred_date]}
         type="date"
-        value={@preferred_date}
         label="Preferred Date"
         min = {Date.add(Date.utc_today, 1)}
         required
@@ -17,7 +16,6 @@
         field={form[:alternate_date_of_visit]}
         type="date"
         label="Alternate Date of visit  (optional)"
-        value={@alternate_date_of_visit}
         min = {Date.add(Date.utc_today, 1)}
         required
         />
@@ -26,7 +24,6 @@
         field={form[:place_of_stay]}
         type="text"
         label="Place Of Stay"
-        value={@place_of_stay}
         maxlength="30"
         required
         />
@@ -34,7 +31,6 @@
         field={form[:arrival_date]}
         type="date"
         label="Arrival Date"
-        value={@arrival_date}
         required
         />
         <%= if @date_validation == "alt date of visit is greater than dep date" do%>
@@ -47,7 +43,6 @@
         <.modified_input
         field={form[:departure_date]}
         type="date"
-        value={@departure_date}
         label="Departure Date"
         required
         />
@@ -64,7 +59,6 @@
        <.input
         field={form[:notes]}
         type="textarea"
-        value={@notes}
         label="Additional Notes"
         maxlength="100"
         />

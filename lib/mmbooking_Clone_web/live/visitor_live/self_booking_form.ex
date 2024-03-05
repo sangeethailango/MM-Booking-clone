@@ -8,19 +8,12 @@ defmodule Mmbooking_CloneWeb.VisitorLive.SelfBookingForm do
     socket
     |> assign(first_name: visitor.first_name)
     |> assign(last_name: visitor.last_name)
-    |> assign(preferred_date: visitor.preferred_date)
-    |> assign(place_of_stay: visitor.place_of_stay)
-    |> assign(arrival_date: visitor.arrival_date)
-    |> assign(departure_date: visitor.departure_date)
-    |> assign(notes: visitor.notes)
-    |> assign(alternate_date_of_visit: visitor.alternate_date_of_visit)
     |> assign(date_validation: nil)
     |> assign(visitor: visitor)
     }
   end
 
   def handle_event("submit", visitor_params, socket) do
-
     date_validation = cond do
       visitor_params["preferred_date"] == visitor_params["arrival_date"] -> "pref date and arr date is same"
       visitor_params["preferred_date"] > visitor_params["departure_date"] -> "pref date is greater than dep date"
@@ -35,6 +28,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.SelfBookingForm do
       socket
       |> assign(date_validation: date_validation)
       |> put_flash(:info, "Successfully Updated")
+      |> redirect(to: ~p"/visitor_home/#{socket.assigns.visitor.id}")
       }
     else
       {:noreply,
