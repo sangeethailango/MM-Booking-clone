@@ -5,13 +5,13 @@ defmodule Mmbooking_CloneWeb.UserAuth do
   import Phoenix.Controller
 
   alias Mmbooking_Clone.Authentication
-
   # Make the remember me cookie valid for 60 days.
   # If you want bump or reduce this value, also change
   # the token expiry itself in UserToken.
   @max_age 60 * 60 * 24 * 60
   @remember_me_cookie "_mmbooking__clone_web_user_remember_me"
   @remember_me_options [sign: true, max_age: @max_age, same_site: "Lax"]
+  @list_of_admins "sangeethailango21@gmail.com"
 
   @doc """
   Logs the user in.
@@ -191,6 +191,18 @@ defmodule Mmbooking_CloneWeb.UserAuth do
     else
       conn
     end
+  end
+
+  def is_user_admin(conn, _opts) do
+      if conn.assigns[:current_user].email do
+        if Enum.member?([conn.assigns[:current_user].email], @list_of_admins) do
+          conn
+        else
+          conn
+          |> put_flash(:error, "Your are not authenticated to access this page")
+          |> redirect(to: ~p"/")
+        end
+      end
   end
 
   @doc """

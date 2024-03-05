@@ -32,6 +32,14 @@ defmodule Mmbooking_CloneWeb.Router do
     live "/self_form_booking/:id", VisitorLive.SelfBookingForm
   end
 
+  ## Admin routes
+
+  scope "/admin", Mmbooking_CloneWeb do
+    pipe_through [:browser, :is_user_admin]
+
+    live "/search_visitors", AdminLive.SearchVisitor
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", Mmbooking_CloneWeb do
   #   pipe_through :api
