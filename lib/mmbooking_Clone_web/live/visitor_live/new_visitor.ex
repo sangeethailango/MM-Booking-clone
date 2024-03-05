@@ -24,6 +24,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     |> assign(departure_date: nil)
     |> assign(notes: nil)
     |> assign(date_validation: nil)
+    |> assign(kid: false)
     |> assign(email_id: session["new_email"])
     |> assign(list_of_countries: countries)
    }
@@ -35,9 +36,20 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
       "No" -> false
     end
 
+    age =  User.calculate_age(params["dob"])
+
+
+    form = if age > 10  do
+      "two"
+    else
+      "one"
+    end
+
+
     {:noreply,
     socket
-    |> assign(form: "two")
+    |> assign(form: form)
+    |> assign(kid: true)
     |> assign(city: params["city"])
     |> assign(country: params["country"])
     |> assign(dob: params["dob"])

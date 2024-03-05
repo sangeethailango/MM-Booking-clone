@@ -46,6 +46,12 @@ defmodule Mmbooking_Clone.User do
     end
   end
 
+  def calculate_age(dob) do
+    dob = Date.from_iso8601!(dob)
+    number_of_days = Date.diff(Date.utc_today, dob)
+    number_of_days / 365
+  end
+
   def list_of_countries() do
     ["Afghanistan",
     "Albania",
