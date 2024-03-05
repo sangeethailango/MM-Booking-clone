@@ -35,6 +35,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.SelfBookingForm do
       socket
       |> assign(date_validation: date_validation)
       |> put_flash(:info, "Successfully Updated")
+      |> redirect(to: ~p"/visitor_home/#{socket.assigns.visitor.id}")
       }
     else
       {:noreply,
