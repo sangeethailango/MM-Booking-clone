@@ -1,6 +1,6 @@
 <%= if @form == "one" do %>
     <h1  class="font-bold text-2xl text-center">New Visitor Form</h1>
-      <.simple_form :let={form} for={%{}} phx-change="repeat_visitor-change" phx-submit="visitor-form-submit">
+      <.simple_form :let={form} for={%{}} phx-change="visitor-form-change" phx-submit="visitor-form-submit">
         <div class="grid grid-cols-2"> 
           <p class="font-semibold pb-4"> Email ID </p>
           <div class="">
@@ -74,7 +74,7 @@
 <% end %>
 <%= if @form == "two" do %>
     <h1 class="font-bold text-2xl text-center">New Booking Form</h1>
-    <.simple_form :let={form} for={%{}} phx-change="booking-form-validation-change" phx-submit="booking-form-submit">
+    <.simple_form :let={form} for={%{}} phx-change="booking-form-change" phx-submit="booking-form-submit">
       <.modified_input
         field={form[:preferred_date]}
         type="date"
@@ -132,7 +132,7 @@
         value={@notes}
         />
       <div class="text-right">  
-        <.button name="button" value="back">back</.button>
+        <.button phx-click="back_button-booking_form">back</.button>
         <.button name="button" value="next">next</.button>
       </div>
     </.simple_form>

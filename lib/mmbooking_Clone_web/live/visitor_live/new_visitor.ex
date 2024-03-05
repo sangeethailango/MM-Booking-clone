@@ -3,6 +3,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
 
   alias Mmbooking_Clone.User
   alias Mmbooking_CloneWeb.VisitorLive.AcknowledgementEmail
+
   def mount(_params, session, socket) do
     countries = User.list_of_countries()
 
@@ -31,7 +32,6 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
   end
 
   def handle_event("visitor-form-submit", params, socket) do
-      IO.puts("1")
       have_you_visited_inner_chamber = case params["have_you_visited_inner_chamber"] do
         "Yes" -> true
         "No" -> false
@@ -59,11 +59,12 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
     }
   end
 
-  def handle_event("repeat_visitor-change", params, socket) do
+  def handle_event("visitor-form-change", params, socket) do
     {:noreply,
     socket
     |> assign(repeat_visitor: params["have_you_visited_inner_chamber"])
     |> assign(first_name: params["first_name"])
+    |> assign(have_you_visited_inner_chamber: params["have_you_visited_inner_chamber"])
     |> assign(last_name: params["last_name"])
     |> assign(city: params["city"])
     |> assign(country: params["country"])
@@ -72,6 +73,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
   end
 
   def handle_event("booking-form-submit", params, socket) do
+
     if params["button"] == "next" do
       date_validation =
         cond do
@@ -114,33 +116,36 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
         |> assign(departure_date: params["departure_date"])
         |> assign(notes: params["notes"])
         }
-    else
-        {:noreply,
-          socket
-          |> assign(form: "one")
-        }
-     end
+      else
+        {:noreply, socket}
+      end
   end
 
-  def handle_event("booking-form-validation-change", params, socket) do
+  def handle_event("booking-form-change", params, socket) do
+    {:noreply,
+    socket
+    |> assign(preferred_date: params["preferred_date"])
+    |> assign(departure_date: params["departure_date"])
+    |> assign(dob: socket.assigns.dob)
+    |> assign(arrival_date: params["arrival_date"])
+    |> assign(alternate_date_of_visit: params["alternate_date_of_visit"])
+    |> assign(place_of_stay: params["place_of_stay"])
+    |> assign(notes: params["notes"])
+    }
+  end
+
+  def handle_event("back_button-booking_form", _params, socket) do
     have_you_visited_inner_chamber = if socket.assigns.have_you_visited_inner_chamber == true do
       "Yes"
     else
       "No"
     end
 
-
     {:noreply,
     socket
+    |> assign(form: "one")
     |> assign(kid: nil)
-    |> assign(preferred_date: params["preferred_date"])
-    |> assign(departure_date: params["departure_date"])
-    |> assign(dob: socket.assigns.dob)
-    |> assign(arrival_date: params["arrival_date"])
     |> assign(have_you_visited_inner_chamber: have_you_visited_inner_chamber)
-    |> assign(alternate_date_of_visit: params["alternate_date_of_visit"])
-    |> assign(place_of_stay: params["place_of_stay"])
-    |> assign(notes: params["notes"])
     }
   end
 
