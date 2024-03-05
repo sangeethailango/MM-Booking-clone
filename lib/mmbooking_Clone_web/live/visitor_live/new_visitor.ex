@@ -32,11 +32,6 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
   end
 
   def handle_event("visitor-form-submit", params, socket) do
-      have_you_visited_inner_chamber = case params["have_you_visited_inner_chamber"] do
-        "Yes" -> true
-        "No" -> false
-      end
-
       age =  User.calculate_age(params["dob"])
 
       form = if age > 10 do
@@ -52,7 +47,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
       |> assign(city: params["city"])
       |> assign(country: params["country"])
       |> assign(dob: params["dob"])
-      |> assign(have_you_visited_inner_chamber: have_you_visited_inner_chamber)
+      |> assign(have_you_visited_inner_chamber: params["have_you_visited_inner_chamber"] )
       |> assign(last_date_of_visit: params["last_date_of_visit"])
       |> assign(last_name: params["last_name"])
       |> assign(first_name: params["first_name"])
@@ -60,6 +55,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
   end
 
   def handle_event("visitor-form-change", params, socket) do
+
     {:noreply,
     socket
     |> assign(repeat_visitor: params["have_you_visited_inner_chamber"])
@@ -73,7 +69,6 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
   end
 
   def handle_event("booking-form-submit", params, socket) do
-
     if params["button"] == "next" do
       date_validation =
         cond do
@@ -91,7 +86,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
           "two"
         end
 
-        have_you_visited_innter_chamber =
+        have_you_visited_inner_chamber =
         if socket.assigns.have_you_visited_inner_chamber == "true" do
           "Yes"
         else
@@ -107,7 +102,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
         |> assign(dob: socket.assigns.dob)
         |> assign(country: socket.assigns.country)
         |> assign(city: socket.assigns.city)
-        |> assign(have_you_visited_inner_chamber: have_you_visited_innter_chamber)
+        |> assign(have_you_visited_inner_chamber: have_you_visited_inner_chamber)
         |> assign(last_date_of_visit: socket.assigns.last_date_of_visit)
         |> assign(preferred_date: params["preferred_date"])
         |> assign(alternate_date_of_visit: params["alternate_date_of_visit"])
