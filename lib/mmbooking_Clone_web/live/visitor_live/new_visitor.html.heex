@@ -79,6 +79,7 @@
         field={form[:preferred_date]}
         type="date"
         label="Select Preferred Date of your visite"
+        min = {Date.add(Date.utc_today, 1)}
         value={@preferred_date}        
         required
         />
@@ -93,6 +94,7 @@
         field={form[:alternate_date_of_visit]}
         type="date"
         label="Alternate Date of visit  (optional)"
+        min = {Date.add(Date.utc_today, 1)}
         value={@alternate_date_of_visit}
         />
       <%= if @date_validation == "alt date of visit is greater than dep date" do%>
