@@ -1,0 +1,20 @@
+<.simple_form :let={form} for={%{}} phx-submit="search">
+
+  <.input field={form[:first_name]} label="First Name"/>
+  <.input field={form[:last_name]} label="Last Name"/>
+  <.input field={form[:city]} label="City"/>
+  <.input field={form[:email_id]} label="Email ID" type="email"/>
+  <.input field={form[:dob]} label="DOB" type="date"/> 
+  <.input field={form[:preferred_date]} label="Preferred Date" type="date"/> 
+
+  <.button>Search</.button>
+
+</.simple_form>
+
+<.table id="visitors" rows={@visitors}>
+  <:col :let={visitor} label="First Name"><%= visitor.first_name %></:col>
+  <:col :let={visitor} label="Last Name"><%= visitor.last_name %></:col>
+  <:col :let={visitor} label="city"><%= visitor.city %></:col>
+  <:col :let={visitor} label="DOB"><%= visitor.dob %></:col>
+  <:col :let={visitor} label="Preferred Date"><%= visitor.preferred_date %></:col>
+</.table>

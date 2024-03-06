@@ -33,6 +33,36 @@ defmodule Mmbooking_Clone.User do
     Repo.all(query)
   end
 
+  def search_visitor(search_params) do
+    Visitor
+    |> visitor_query(search_params)
+    |> Repo.all()
+  end
+
+  def visitor_query(visitor, search_params)  do
+    search_params
+    |> Enum.reject(fn {_key, value} -> String.trim(value) == "" end)
+    |> Enum.reduce(visitor, fn
+
+      {"first_name", first_name}, visitor -> from p in visitor, where: p.first_name == ^first_name
+
+      {"last_name", last_name}, visitor -> from p in visitor, where: p.last_name == ^last_name
+
+      {"email_id", email_id}, visitor -> from p in visitor, where: p.email_id == ^email_id
+
+      {"city", city}, visitor -> from p in visitor, where: p.city == ^city
+
+      {"dob", dob}, visitor -> from p in visitor, where: p.dob == ^dob
+
+      {"preferred_date", preferred_date}, visitor -> from p in visitor, where: p.preferred_date == ^preferred_date
+
+      _, visitor ->
+        visitor
+
+    end
+    )
+  end
+
   def date_format(date) do
     date = Date.from_iso8601!(date)
     Timex.format!(date, "{D}-{M}-{YYYY}")
