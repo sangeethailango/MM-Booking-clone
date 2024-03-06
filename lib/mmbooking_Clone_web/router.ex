@@ -36,7 +36,8 @@ defmodule Mmbooking_CloneWeb.Router do
   scope "/admin", Mmbooking_CloneWeb do
     pipe_through [:browser, :is_user_admin]
 
-    live "/search_visitors", AdminLive.SearchVisitor
+    live "/search_visitors", AdminLive.SearchVisitor, :index
+    live "/search_visitors/add_visitor", AdminLive.SearchVisitor, :add_visitor
   end
 
   # Other scopes may use custom stacks.

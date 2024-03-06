@@ -18,4 +18,19 @@ defmodule Mmbooking_CloneWeb.AdminLive.SearchVisitor do
     |> assign(visitors: visitors)
    }
   end
+
+  def handle_params(params, _url, socket) do
+    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+  end
+
+  def apply_action(socket, :index, _params) do
+    socket
+    |> assign(:page_title, "Search Visitors")
+  end
+
+  def apply_action(socket, :add_visitor, _params) do
+    socket
+    |> assign(:page_title, "Add Visitor")
+  end
+
 end
