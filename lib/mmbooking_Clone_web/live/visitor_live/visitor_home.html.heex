@@ -16,7 +16,7 @@
        <input type="radio" name="Visitor" value={family_member.id} phx-click="selected-member-change">
     </:col> 
     <:col :let={family_member} label="First Name">
-      <.link href={~p"/personal_details/#{family_member.id}"}><u> <%= family_member.first_name%> </u> </.link>
+      <.link href={~p"/visitor/personal_details/#{family_member.id}"}><u> <%= family_member.first_name%> </u> </.link>
     </:col>
     <:col :let={family_member} label="Last Name"> <%= family_member.last_name%> </:col>
     <:col :let={family_member} label="Date Of Birth"> <%= Timex.format!(family_member.dob, "{D}-{M}-{YYYY}") %> </:col>

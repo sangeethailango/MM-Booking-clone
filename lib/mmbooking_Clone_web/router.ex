@@ -1,6 +1,8 @@
 defmodule Mmbooking_CloneWeb.Router do
   use Mmbooking_CloneWeb, :router
 
+  import Mmbooking_CloneWeb.UserAuth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -8,16 +10,16 @@ defmodule Mmbooking_CloneWeb.Router do
     plug :put_root_layout, {Mmbooking_CloneWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :fetch_current_user
   end
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  scope "/", Mmbooking_CloneWeb do
+  scope "/visitor", Mmbooking_CloneWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
     live "/welcome", VisitorLive.Welcome, :index
     get "/welcome/new_visitor/:email_id", PageController, :new_email
     live "/visitor_form", VisitorLive.NewVisitor
@@ -27,6 +29,14 @@ defmodule Mmbooking_CloneWeb.Router do
     live "/edit_personal_details/:id", VisitorLive.PersonalDetails, :edit
     live "/your_bookings/:id", VisitorLive.YourBookings
     live "/self_form_booking/:id", VisitorLive.SelfBookingForm
+  end
+
+  ## Admin routes
+
+  scope "/admin", Mmbooking_CloneWeb do
+    pipe_through [:browser, :is_user_admin]
+
+    live "/search_visitors", AdminLive.SearchVisitor
   end
 
   # Other scopes may use custom stacks.
@@ -48,6 +58,44 @@ defmodule Mmbooking_CloneWeb.Router do
 
       live_dashboard "/dashboard", metrics: Mmbooking_CloneWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
+    end
+  end
+
+  ## Authentication routes
+
+  scope "/", Mmbooking_CloneWeb do
+    pipe_through [:browser, :redirect_if_user_is_authenticated]
+
+    live_session :redirect_if_user_is_authenticated,
+      on_mount: [{Mmbooking_CloneWeb.UserAuth, :redirect_if_user_is_authenticated}] do
+      live "/", UserRegistrationLive, :new
+      live "/log_in", UserLoginLive, :new
+      live "/reset_password", UserForgotPasswordLive, :new
+      live "/reset_password/:token", UserResetPasswordLive, :edit
+    end
+
+    post "/log_in", UserSessionController, :create
+  end
+
+  scope "/", Mmbooking_CloneWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live_session :require_authenticated_user,
+      on_mount: [{Mmbooking_CloneWeb.UserAuth, :ensure_authenticated}] do
+      live "/settings", UserSettingsLive, :edit
+      live "/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+    end
+  end
+
+  scope "/", Mmbooking_CloneWeb do
+    pipe_through [:browser]
+
+    delete "/log_out", UserSessionController, :delete
+
+    live_session :current_user,
+      on_mount: [{Mmbooking_CloneWeb.UserAuth, :mount_current_user}] do
+      live "/confirm/:token", UserConfirmationLive, :edit
+      live "/confirm", UserConfirmationInstructionsLive, :new
     end
   end
 end

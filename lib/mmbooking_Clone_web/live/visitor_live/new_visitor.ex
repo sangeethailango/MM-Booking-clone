@@ -165,7 +165,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.NewVisitor do
 
       {:noreply,
       socket
-      |> push_navigate(to: ~p"/report/#{visitor.id}")
+      |> push_navigate(to: ~p"/visitor/report/#{visitor.id}")
       }
     else
       {:noreply,

@@ -10,6 +10,6 @@ defmodule Mmbooking_CloneWeb.PageController do
   def new_email(conn, params) do
     conn
     |> put_session(:new_email, params["email_id"])
-    |> redirect(to: ~p"/visitor_form")
+    |> redirect(to: ~p"/visitor/visitor_form")
   end
 end
