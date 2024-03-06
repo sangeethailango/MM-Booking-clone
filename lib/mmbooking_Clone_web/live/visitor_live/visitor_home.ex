@@ -26,7 +26,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.VisitorHome do
     else
       {:noreply,
       socket
-      |> push_navigate(to: ~p"/welcome/new_visitor/#{socket.assigns.email_id}")
+      |> push_navigate(to: ~p"/visitor/welcome/new_visitor/#{socket.assigns.email_id}")
       }
     end
   end
@@ -42,7 +42,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.VisitorHome do
   def handle_event("bookings", _params, socket) do
     {:noreply,
     socket
-    |> push_navigate(to: ~p"/your_bookings/#{socket.assigns.id}")
+    |> push_navigate(to: ~p"/visitor/your_bookings/#{socket.assigns.id}")
     }
   end
 end

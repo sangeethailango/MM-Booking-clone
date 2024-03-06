@@ -29,19 +29,19 @@
 
 <div class="grid grid-cols-2 pt-4">
   <div>
-    <.link href={~p"/your_bookings/#{@id}"}>
+    <.link href={~p"/visitor/your_bookings/#{@id}"}>
       <.button>
         Bookings
       </.button>
     </.link>
-    <.link href={~p"/visitor_home/#{@id}"}>
+    <.link href={~p"/visitor/visitor_home/#{@id}"}>
       <.button>
         Home
       </.button>
     </.link>    
   </div>
   <div class="text-right">
-  <.link href={~p"/edit_personal_details/#{@id}"}>
+  <.link href={~p"/visitor/edit_personal_details/#{@id}"}>
       <.button>
         Edit
       </.button>
@@ -52,7 +52,7 @@
   :if={@live_action in [:edit]}
   id = "Edit"
   show
-  on_cancel={JS.navigate(~p"/personal_details/#{@id}")}
+  on_cancel={JS.navigate(~p"/visitor/personal_details/#{@id}")}
 >
   <.live_component
     module={Mmbooking_CloneWeb.VisitorLive.EditPersonalDetailsComponent}
@@ -60,6 +60,6 @@
     visitor_id={@id}
     title={@page_title}
     live_action={@live_action}
-    navigate={~p"/personal_details/#{@id}"}
+    navigate={~p"/visitor/personal_details/#{@id}"}
   />
 </.modal>  

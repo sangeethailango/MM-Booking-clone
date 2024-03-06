@@ -24,13 +24,13 @@ defmodule Mmbooking_CloneWeb.VisitorLive.Welcome do
         if params["email_id"] in emails do
           {:noreply,
           socket
-          |> push_navigate(to: ~p"/visitor_home/#{id}")
+          |> push_navigate(to: ~p"/visitor/visitor_home/#{id}")
           }
         else
           {:noreply,
           socket
           # |> put_session(:key, "value")
-          |> push_navigate(to: ~p"/welcome/new_visitor/#{params["email_id"]}")
+          |> push_navigate(to: ~p"/visitor/welcome/new_visitor/#{params["email_id"]}")
           }
         end
       "false" ->

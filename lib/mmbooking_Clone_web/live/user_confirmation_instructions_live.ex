@@ -21,8 +21,8 @@ defmodule Mmbooking_CloneWeb.UserConfirmationInstructionsLive do
       </.simple_form>
 
       <p class="text-center mt-4">
-        <.link href={~p"/users/register"}>Register</.link>
-        | <.link href={~p"/users/log_in"}>Log in</.link>
+        <.link href={~p"/"}>Register</.link>
+        | <.link href={~p"/log_in"}>Log in</.link>
       </p>
     </div>
     """
@@ -36,7 +36,7 @@ defmodule Mmbooking_CloneWeb.UserConfirmationInstructionsLive do
     if user = Authentication.get_user_by_email(email) do
       Authentication.deliver_user_confirmation_instructions(
         user,
-        &url(~p"/users/confirm/#{&1}")
+        &url(~p"/confirm/#{&1}")
       )
     end
 

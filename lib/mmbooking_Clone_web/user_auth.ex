@@ -156,7 +156,7 @@ defmodule Mmbooking_CloneWeb.UserAuth do
       socket =
         socket
         |> Phoenix.LiveView.put_flash(:error, "You must log in to access this page.")
-        |> Phoenix.LiveView.redirect(to: ~p"/users/log_in")
+        |> Phoenix.LiveView.redirect(to: ~p"/log_in")
 
       {:halt, socket}
     end
@@ -185,9 +185,14 @@ defmodule Mmbooking_CloneWeb.UserAuth do
   """
   def redirect_if_user_is_authenticated(conn, _opts) do
     if conn.assigns[:current_user] do
-      conn
-      |> redirect(to: signed_in_path(conn))
-      |> halt()
+      if Enum.member?([conn.assigns[:current_user].email], @list_of_admins) do
+        conn
+        |> redirect(to: ~p"/admin/search_visitors")
+        |> halt()
+      else
+        conn
+        |> redirect(to: ~p"/visitor/welcome")
+      end
     else
       conn
     end
@@ -218,7 +223,7 @@ defmodule Mmbooking_CloneWeb.UserAuth do
       conn
       |> put_flash(:error, "You must log in to access this page.")
       |> maybe_store_return_to()
-      |> redirect(to: ~p"/users/log_in")
+      |> redirect(to: ~p"/log_in")
       |> halt()
     end
   end
@@ -236,4 +241,5 @@ defmodule Mmbooking_CloneWeb.UserAuth do
   defp maybe_store_return_to(conn), do: conn
 
   defp signed_in_path(_conn), do: ~p"/"
+
 end

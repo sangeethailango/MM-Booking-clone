@@ -44,7 +44,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.EditPersonalDetailsComponent do
           required
           />
           <div class=" flex justify-end gap-2   ">
-            <.link href={~p"/personal_details/#{@id}"}>
+            <.link href={~p"/visitor/personal_details/#{@id}"}>
               <p class="inline-block rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3
               text-sm font-semibold leading-6 text-white active:text-white/80 uppercase">Cancel</p>
             </.link>
@@ -81,7 +81,7 @@ defmodule Mmbooking_CloneWeb.VisitorLive.EditPersonalDetailsComponent do
     {:noreply,
     socket
     |> put_flash(:info, "Successfully Updated!!")
-    |> push_navigate(to: ~p"/personal_details/#{socket.assigns.id}")
+    |> push_navigate(to: ~p"/visitor/personal_details/#{socket.assigns.id}")
     }
   end
 end
