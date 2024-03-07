@@ -32,7 +32,7 @@ defmodule Mmbooking_CloneWeb.UserResetPasswordLive do
 
       <p class="text-center text-sm mt-4">
         <.link href={~p"/"}>Register</.link>
-        | <.link href={~p"/log_in"}>Log in</.link>
+        | <.link href={~p"/"}>Log in</.link>
       </p>
     </div>
     """
@@ -61,7 +61,7 @@ defmodule Mmbooking_CloneWeb.UserResetPasswordLive do
         {:noreply,
          socket
          |> put_flash(:info, "Password reset successfully.")
-         |> redirect(to: ~p"/log_in")}
+         |> redirect(to: ~p"/")}
 
       {:error, changeset} ->
         {:noreply, assign_form(socket, Map.put(changeset, :action, :insert))}

@@ -16,8 +16,7 @@ defmodule Mmbooking_CloneWeb.UserConfirmationLive do
       </.simple_form>
 
       <p class="text-center mt-4">
-        <.link href={~p"/"}>Register</.link>
-        | <.link href={~p"/log_in"}>Log in</.link>
+        | <.link href={~p"/"}>Log in</.link>
       </p>
     </div>
     """

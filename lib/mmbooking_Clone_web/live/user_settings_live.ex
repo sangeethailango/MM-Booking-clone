@@ -37,7 +37,7 @@ defmodule Mmbooking_CloneWeb.UserSettingsLive do
         <.simple_form
           for={@password_form}
           id="password_form"
-          action={~p"/log_in?_action=password_updated"}
+          action={~p"/?_action=password_updated"}
           method="post"
           phx-change="validate_password"
           phx-submit="update_password"

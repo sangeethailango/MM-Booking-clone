@@ -4,6 +4,7 @@ defmodule Mmbooking_Clone.User do
   alias Mmbooking_Clone.User.Visitor
   alias Mmbooking_Clone.Repo
 
+  @list_of_admins "sangeethailango21@gmail.com"
 
   def list_all_visitor() do
     Repo.all(Visitor)
@@ -80,6 +81,13 @@ defmodule Mmbooking_Clone.User do
     dob = Date.from_iso8601!(dob)
     number_of_days = Date.diff(Date.utc_today, dob)
     number_of_days / 365
+  end
+
+  def is_admin(email_id) do
+    case email_id in [@list_of_admins] do
+      true -> true
+      false -> false
+    end
   end
 
   def list_of_countries() do
