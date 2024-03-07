@@ -3,8 +3,7 @@ defmodule Mmbooking_Clone.User do
   import Ecto.Query
   alias Mmbooking_Clone.User.Visitor
   alias Mmbooking_Clone.Repo
-
-  @list_of_admins "sangeethailango21@gmail.com"
+  alias Mmbooking_Clone.Authentication.User
 
   def list_all_visitor() do
     Repo.all(Visitor)
@@ -77,6 +76,10 @@ defmodule Mmbooking_Clone.User do
     end
   end
 
+  def get_user_by_email(email_id) do
+    Repo.get_by(User, email: email_id)
+  end
+
   def calculate_age(dob) do
     dob = Date.from_iso8601!(dob)
     number_of_days = Date.diff(Date.utc_today, dob)
@@ -84,7 +87,8 @@ defmodule Mmbooking_Clone.User do
   end
 
   def is_admin(email_id) do
-    case email_id in [@list_of_admins] do
+    user = get_user_by_email(email_id)
+    case user.role == "admin" do
       true -> true
       false -> false
     end

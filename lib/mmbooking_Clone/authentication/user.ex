@@ -6,6 +6,7 @@ defmodule Mmbooking_Clone.Authentication.User do
     field :email, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
+    field :role, :string
     field :confirmed_at, :naive_datetime
 
     timestamps()
@@ -37,6 +38,13 @@ defmodule Mmbooking_Clone.Authentication.User do
   def registration_changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:email, :password])
+    |> validate_email(opts)
+    |> validate_password(opts)
+  end
+
+  def add_admin_changeset(user, attrs, opts \\ []) do
+    user
+    |> cast(attrs, [:email, :password, :role])
     |> validate_email(opts)
     |> validate_password(opts)
   end
