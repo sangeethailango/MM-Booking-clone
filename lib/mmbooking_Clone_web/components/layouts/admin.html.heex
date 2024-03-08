@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" style="scrollbar-gutter: stable;">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title suffix=" · Phoenix Framework">
+      <%= assigns[:page_title] || "Mmbooking_Clone" %>
+    </.live_title>
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+    </script>
+  </head>
+  <body>
+    <nav class="bg-white shadow">
+     <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
+      <div>
+          <p class="inline-block font-bold text-2xl text-red-800 font-mono">MatriMandir</p>     
+          <div>
+            <%= if @current_user do %>
+              <li class="text-[0.8125rem] leading-6 text-zinc-900">
+                <%= @current_user.email %>
+              </li>
+              <li>
+                <.link
+                  href={~p"/settings"}
+                  class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+                >
+                  Settings
+                </.link>
+              </li>
+              <li>
+                <.link
+                  href={~p"/log_out"}
+                  method="delete"
+                  class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+                >
+                  Log out
+                </.link>
+              </li>
+            <% else %>
+              <li>
+                <.link
+                  href={~p"/"}
+                  class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+                >
+                  Log in
+                </.link>
+              </li>
+            <% end %>
+          </div>  
+      </div>    
+     </ul>
+    </nav>
+    
+    <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
+      <div class="fixed inset-0 bg-gray-900/80"></div>
+        <div class="fixed inset-0 flex">
+          <div class="relative mr-16 flex w-full max-w-xs flex-1">
+            <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
+              <nav class="flex flex-1 flex-col">
+                <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                  <li>
+                    <ul role="list" class="-mx-2 space-y-1">
+                      <li>
+                        <a href="/admin/search_visitors" class="bg-gray-50 text-indigo-600 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                          <svg class="h-6 w-6 shrink-0 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                          </svg>
+                          Seach Visitor
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+        <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+          <nav class="flex flex-1 flex-col">
+            <ul role="list" class="flex flex-1 flex-col gap-y-7">
+              <li>
+                <ul role="list" class="-mx-2 space-y-1">
+                  <li>
+                    <a href="/admin/search_visitors" class="bg-gray-50 text-indigo-600 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                      <svg class="h-6 w-6 shrink-0 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                      </svg>
+                      Search Visitor
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/admin/add_admin" class="bg-gray-50 text-indigo-600 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                      <svg class="h-6 w-6 shrink-0 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                      </svg>
+                      Add Admin
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+  <%= @inner_content %>
+  </body>
+</html>

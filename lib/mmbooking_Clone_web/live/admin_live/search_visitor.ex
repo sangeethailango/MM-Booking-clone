@@ -2,7 +2,7 @@ defmodule Mmbooking_CloneWeb.AdminLive.SearchVisitor do
   use Mmbooking_CloneWeb, :live_view
 
   alias Mmbooking_Clone.User
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
     visitors = User.list_all_visitor()
     {:ok,
     socket
