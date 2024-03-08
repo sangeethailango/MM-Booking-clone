@@ -16,9 +16,16 @@
 </.simple_form>
 
 <.table id="visitors" rows={@visitors}>
-  <:col :let={visitor} label="Email ID"><%= visitor.email_id %></:col>
-  <:col :let={visitor} label="First Name"><%= visitor.first_name %></:col>
+  <:col :let={visitor} label="First Name">  
+  <.link href={~p"/admin/visitor_booking_details/#{visitor.id}"}>
+   <u><%=  visitor.first_name %></u>
+  </.link>  
+  </:col>
   <:col :let={visitor} label="Last Name"><%= visitor.last_name %></:col>
+  <:col :let={visitor} label="Email ID">
+      <%= visitor.email_id %>
+  </:col>
+  <:col :let={visitor} label="country"><%= visitor.country %></:col>
   <:col :let={visitor} label="city"><%= visitor.city %></:col>
   <:col :let={visitor} label="DOB"><%= visitor.dob %></:col>
   <:col :let={visitor} label="Preferred Date"><%= visitor.preferred_date %></:col>

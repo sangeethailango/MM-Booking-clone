@@ -1,0 +1,80 @@
+<div class="grid grid-cols-2" >
+  <p class="inline-block">Visitor ID</p>
+  <p class="inline-block"> <%= @visitor.id %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">First Name</p>
+  <p class="inline-block"> <%= @visitor.first_name %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">Last Name</p>
+  <p class="inline-block"> <%= @visitor.last_name %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">Date Of Birth</p>
+  <p class="inline-block"> <%= @visitor.dob %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">Email ID</p>
+  <p class="inline-block"> <%= @visitor.email_id %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">Country</p>
+  <p class="inline-block"> <%= @visitor.country %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">City</p>
+  <p class="inline-block"> <%= @visitor.city %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">Preferred Date</p>
+  <p class="inline-block"> <%= @visitor.preferred_date %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">Alternate Date</p>
+  <p class="inline-block"> <%= @visitor.alternate_date_of_visit %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">Staying At</p>
+  <p class="inline-block"> <%= @visitor.place_of_stay %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">Arrival Date</p>
+  <p class="inline-block"> <%= @visitor.arrival_date %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">Departure Date</p>
+  <p class="inline-block"> <%= @visitor.departure_date %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">Additional Notes</p>
+  <p class="inline-block"> <%= @visitor.notes %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">Visited the Inner Chamber</p>
+  <p class="inline-block"> <%= @visitor.have_you_visited_inner_chamber %> </p>
+</div>
+
+<div class="grid grid-cols-2">
+  <p class="inline-block">Last Visit Date</p>
+  <p class="inline-block"> <%= @visitor.last_date_of_visit %> </p>
+</div>
+
+<.link href={~p"/admin/merge_duplicate_profiles/#{@visitor.id}"}>
+  <.button>
+    Find Duplicate
+  </.button>
+</.link>  

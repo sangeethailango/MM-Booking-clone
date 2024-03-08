@@ -50,6 +50,10 @@ defmodule Mmbooking_CloneWeb.Router do
     live "/search_visitors", AdminLive.SearchVisitor, :index
     live "/search_visitors/add_visitor", AdminLive.SearchVisitor, :add_visitor
     live "/add_admin", AdminLive.AddAdmin
+    live "/visitor_booking_details/:id", AdminLive.VisitorBookingDetails
+    live "/merge_duplicate_profiles/:id", AdminLive.MergeDuplicateProfile
+
+
   end
 
   # Other scopes may use custom stacks.
