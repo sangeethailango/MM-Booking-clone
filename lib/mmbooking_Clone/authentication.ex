@@ -80,6 +80,12 @@ defmodule Mmbooking_Clone.Authentication do
     |> Repo.insert()
   end
 
+  def add_admin(attrs) do
+    %User{}
+    |> User.add_admin_changeset(attrs)
+    |> Repo.insert()
+  end
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
 

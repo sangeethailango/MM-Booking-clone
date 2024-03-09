@@ -3,7 +3,7 @@ defmodule Mmbooking_Clone.User do
   import Ecto.Query
   alias Mmbooking_Clone.User.Visitor
   alias Mmbooking_Clone.Repo
-
+  alias Mmbooking_Clone.Authentication.User
 
   def list_all_visitor() do
     Repo.all(Visitor)
@@ -11,7 +11,7 @@ defmodule Mmbooking_Clone.User do
 
   def insert_new_visitor(visitor_details) do
     %Visitor{}
-    |> Visitor.changeset(visitor_details)
+    |> Visitor.add_visitor_admin_changeset(visitor_details)
     |> Repo.insert!()
   end
 
@@ -33,6 +33,36 @@ defmodule Mmbooking_Clone.User do
     Repo.all(query)
   end
 
+  def search_visitor(search_params) do
+    Visitor
+    |> visitor_query(search_params)
+    |> Repo.all()
+  end
+
+  def visitor_query(visitor, search_params)  do
+    search_params
+    |> Enum.reject(fn {_key, value} -> String.trim(value) == "" end)
+    |> Enum.reduce(visitor, fn
+
+      {"first_name", first_name}, visitor -> from p in visitor, where: p.first_name == ^first_name
+
+      {"last_name", last_name}, visitor -> from p in visitor, where: p.last_name == ^last_name
+
+      {"email_id", email_id}, visitor -> from p in visitor, where: p.email_id == ^email_id
+
+      {"city", city}, visitor -> from p in visitor, where: p.city == ^city
+
+      {"dob", dob}, visitor -> from p in visitor, where: p.dob == ^dob
+
+      {"preferred_date", preferred_date}, visitor -> from p in visitor, where: p.preferred_date == ^preferred_date
+
+      _, visitor ->
+        visitor
+
+    end
+    )
+  end
+
   def date_format(date) do
     date = Date.from_iso8601!(date)
     Timex.format!(date, "{D}-{M}-{YYYY}")
@@ -46,10 +76,22 @@ defmodule Mmbooking_Clone.User do
     end
   end
 
+  def get_user_by_email(email_id) do
+    Repo.get_by(User, email: email_id)
+  end
+
   def calculate_age(dob) do
     dob = Date.from_iso8601!(dob)
     number_of_days = Date.diff(Date.utc_today, dob)
     number_of_days / 365
+  end
+
+  def is_admin(email_id) do
+    user = get_user_by_email(email_id)
+    case user.role == "admin" do
+      true -> true
+      false -> false
+    end
   end
 
   def list_of_countries() do

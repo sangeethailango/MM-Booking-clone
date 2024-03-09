@@ -79,7 +79,7 @@ defmodule Mmbooking_CloneWeb.UserRegistrationLiveTest do
         lv
         |> element(~s|main a:fl-contains("Sign in")|)
         |> render_click()
-        |> follow_redirect(conn, ~p"/log_in")
+        |> follow_redirect(conn, ~p"/")
 
       assert login_html =~ "Log in"
     end

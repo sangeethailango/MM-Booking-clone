@@ -13,6 +13,17 @@ defmodule Mmbooking_CloneWeb.Router do
     plug :fetch_current_user
   end
 
+  pipeline :admin do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :put_root_layout, {Mmbooking_CloneWeb.Layouts, :admin}
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    plug :fetch_current_user
+  end
+
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -34,9 +45,15 @@ defmodule Mmbooking_CloneWeb.Router do
   ## Admin routes
 
   scope "/admin", Mmbooking_CloneWeb do
-    pipe_through [:browser, :is_user_admin]
+    pipe_through [:admin, :is_user_admin]
 
-    live "/search_visitors", AdminLive.SearchVisitor
+    live "/search_visitors", AdminLive.SearchVisitor, :index
+    live "/search_visitors/add_visitor", AdminLive.SearchVisitor, :add_visitor
+    live "/add_admin", AdminLive.AddAdmin
+    live "/visitor_booking_details/:id", AdminLive.VisitorBookingDetails
+    live "/merge_duplicate_profiles/:id", AdminLive.MergeDuplicateProfile
+
+
   end
 
   # Other scopes may use custom stacks.
@@ -68,13 +85,12 @@ defmodule Mmbooking_CloneWeb.Router do
 
     live_session :redirect_if_user_is_authenticated,
       on_mount: [{Mmbooking_CloneWeb.UserAuth, :redirect_if_user_is_authenticated}] do
-      live "/", UserRegistrationLive, :new
-      live "/log_in", UserLoginLive, :new
+      live "/", UserLoginLive, :new
       live "/reset_password", UserForgotPasswordLive, :new
       live "/reset_password/:token", UserResetPasswordLive, :edit
     end
 
-    post "/log_in", UserSessionController, :create
+    post "/", UserSessionController, :create
   end
 
   scope "/", Mmbooking_CloneWeb do

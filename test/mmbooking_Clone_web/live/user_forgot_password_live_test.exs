@@ -13,7 +13,7 @@ defmodule Mmbooking_CloneWeb.UserForgotPasswordLiveTest do
 
       assert html =~ "Forgot your password?"
       assert has_element?(lv, ~s|a[href="#{~p"/"}"]|, "Register")
-      assert has_element?(lv, ~s|a[href="#{~p"/log_in"}"]|, "Log in")
+      assert has_element?(lv, ~s|a[href="#{~p"/"}"]|, "Log in")
     end
 
     test "redirects if already logged in", %{conn: conn} do
