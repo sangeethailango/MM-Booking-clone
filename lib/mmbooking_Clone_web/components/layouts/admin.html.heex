@@ -12,11 +12,11 @@
     </script>
   </head>
   <body>
-    <nav class="bg-white shadow">
-     <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
-      <div>
-          <p class="inline-block font-bold text-2xl text-red-800 font-mono">MatriMandir</p>     
-          <div>
+    <nav class="bg-white shadow py-4">
+     <ul class="relative z-10   gap-4 px-4 sm:px-6 lg:px-8 justify-end">
+      <div class="flex flex-cols justify-between">
+          <p class="inline-block pl-72  font-bold text-2xl text-red-800 font-mono">MatriMandir</p>     
+          <div class="grid grid-cols-3 text-center">
             <%= if @current_user do %>
               <li class="text-[0.8125rem] leading-6 text-zinc-900">
                 <%= @current_user.email %>
@@ -51,8 +51,8 @@
           </div>  
       </div>    
      </ul>
+
     </nav>
-    
     <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
       <div class="fixed inset-0 bg-gray-900/80"></div>
         <div class="fixed inset-0 flex">
@@ -109,3 +109,4 @@
   <%= @inner_content %>
   </body>
 </html>
+

@@ -12,10 +12,11 @@
     </script>
   </head>
   <body class="bg-white antialiased">
-    <nav class="bg-white shadow">
-      <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
-       <div>
+    <nav class="bg-white shadow py-4">
+      <ul class="relative z-10  px-4 sm:px-6 lg:px-8 ">
+       <div class="inline-block flex flex-cols justify-between">
         <p class="font-bold text-2xl text-red-800 font-mono">MatriMandir</p>  
+        <div class="flex gap-5">  
           <%= if @current_user do %>
             <li class="text-[0.8125rem] leading-6 text-zinc-900">
               <%= @current_user.email %>
@@ -47,6 +48,7 @@
               </.link>
             </li>
           <% end %>
+        </div>  
         </div>
       </ul>
     </nav>
