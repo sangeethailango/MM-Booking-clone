@@ -7,8 +7,9 @@ defmodule Mmbooking_Clone.Admin.Booking do
     field :group_name, :string
     field :status, :string
     field :has_visited, :boolean
-    field :session_id, :binary_id
-    field :visitor_id, :binary_id
+
+    belongs_to :session, Mmbooking_Clone.Admin.Session
+    belongs_to :visitor, Mmbooking_Clone.User.Visitor
 
     timestamps()
   end

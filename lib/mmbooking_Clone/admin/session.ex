@@ -11,7 +11,8 @@ defmodule Mmbooking_Clone.Admin.Session do
     field :seat, :integer
     field :session_number, :integer
     field :group_name, :string
-    field :template_id, :binary_id
+
+    belongs_to :template, Mmbooking_Clone.Admin.Template
 
     timestamps()
   end
