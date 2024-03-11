@@ -4,7 +4,6 @@ defmodule Mmbooking_Clone.Admin.Template do
 
   schema "templates" do
     field :name, :string
-    field :session_id, :id
 
     timestamps()
   end

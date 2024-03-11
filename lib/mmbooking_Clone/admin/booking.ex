@@ -4,9 +4,11 @@ defmodule Mmbooking_Clone.Admin.Booking do
 
   schema "bookings" do
     field :date, :date
-    field :has_visited, :string
-    field :seats_available, :string
-    field :session, :string
+    field :group_name, :string
+    field :status, :string
+    field :has_visited, :boolean
+    field :session_id, :binary_id
+    field :visitor_id, :binary_id
 
     timestamps()
   end
@@ -14,7 +16,7 @@ defmodule Mmbooking_Clone.Admin.Booking do
   @doc false
   def changeset(booking, attrs) do
     booking
-    |> cast(attrs, [:has_visited, :date, :session, :seats_available])
-    |> validate_required([:has_visited, :date, :session, :seats_available])
+    |> cast(attrs, [:date, :session, :group_name, :status, :has_visited,  :session_id, :visitor_id])
+    |> validate_required([:has_visited, :date, :session])
   end
 end

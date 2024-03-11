@@ -10,8 +10,8 @@ defmodule Mmbooking_Clone.Admin.Session do
     field :report_time_to, :time
     field :seat, :integer
     field :session_number, :integer
-    field :visitor_type, :string
-    field :booking_id, :id
+    field :group_name, :string
+    field :template_id, :binary_id
 
     timestamps()
   end
@@ -19,7 +19,7 @@ defmodule Mmbooking_Clone.Admin.Session do
   @doc false
   def changeset(session, attrs) do
     session
-    |> cast(attrs, [:session_number, :visitor_type, :chamber_time_from, :chamber_to_time, :report_time_from, :report_time_to, :seat, :date])
-    |> validate_required([:session_number, :visitor_type, :chamber_time_from, :chamber_to_time, :report_time_from, :report_time_to, :seat, :date])
+    |> cast(attrs, [:session_number,  :chamber_time_from, :chamber_to_time, :report_time_from, :report_time_to, :seat, :date, :session_number, :group_name, :template_id])
+    |> validate_required([:session_number, :chamber_time_from, :chamber_to_time, :report_time_from, :report_time_to, :seat, :date])
   end
 end
