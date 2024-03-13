@@ -1,0 +1,23 @@
+<.simple_form :let={form} for={%{}} phx-submit="add_template">
+  <.input field={form[:add_name]} type="text" label="Template Name" />
+  <.button> Add Template </.button> 
+  <%= if is_nil(@template_name) == false do %>
+    <.input field={form[:name]} type="select"  options={@template_name} label="Select A Template" phx-change="selected_template" />
+  <% end %>  
+</.simple_form>
+
+<%= if is_nil(@sessions) == false do%>
+<.table id="sessions" rows={@sessions}>
+
+  <:col :let={session} label="Session Number"> <%= session.session_number %> </:col>
+  <:col :let={session} label="Chamber Time From"> <%= session.chamber_time_from %></:col>
+  <:col :let={session} label="Chamber Time To"> <%= session.chamber_to_time %></:col>
+  <:col :let={session} label="Reporting Time From"> <%= session.report_time_from %></:col>
+  <:col :let={session} label="Reporting Time To"> <%= session.report_time_to %></:col>
+  <:col :let={session} label="Seats"> <%= session.seat %></:col>
+  <:col :let={session} label="Group Name"> <%= session.group_name %></:col>
+  <:col :let={session} label="ID"> <%= session.id %></:col>
+
+
+</.table>
+<% end %>

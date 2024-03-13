@@ -2,7 +2,6 @@ defmodule Mmbooking_Clone.Repo.Migrations.ModifySessions do
   use Ecto.Migration
 
   def change do
-
     alter table(:sessions) do
       remove :booking_id, references(:bookings, type: :binary_id, on_delete: :nothing)
       add :template_id, references(:templates, type: :binary_id, on_delete: :nothing)

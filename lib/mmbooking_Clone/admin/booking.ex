@@ -2,6 +2,9 @@ defmodule Mmbooking_Clone.Admin.Booking do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
+
   schema "bookings" do
     field :date, :date
     field :group_name, :string
