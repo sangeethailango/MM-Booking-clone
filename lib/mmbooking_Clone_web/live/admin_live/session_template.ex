@@ -5,6 +5,7 @@ defmodule Mmbooking_CloneWeb.AdminLive.SessionTemplate do
   def mount(_params, _session, socket) do
     templates = Admin.fetch_all_templates()
     template_name = Enum.map(templates, fn name -> name.name end)
+
     {:ok,
     socket
     |> assign(:sessions, nil)

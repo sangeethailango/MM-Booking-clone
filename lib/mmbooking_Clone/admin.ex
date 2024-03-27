@@ -8,12 +8,16 @@ defmodule Mmbooking_Clone.Admin do
 
   def insert_session_for_template(template_name) do
 
-    template =
-      %Template{
+    template_params = %{
       name: template_name
-      } |> Repo.insert!()
+    }
 
-    %Session{
+    template =
+    %Template{}
+    |> Template.changeset(template_params)
+    |> Repo.insert!()
+
+    session_params = %{
     chamber_time_from: ~T[05:15:30],
     chamber_to_time: ~T[23:00:07],
     date: ~D[2029-08-29],
@@ -24,7 +28,11 @@ defmodule Mmbooking_Clone.Admin do
     group_name: "First Group",
     template_id: template.id
     }
-    |> Repo.insert!() |> Repo.preload(:template)
+
+    %Session{}
+    |> Session.changeset(session_params)
+    |> Repo.insert!()
+
   end
 
   def fetch_all_templates() do
