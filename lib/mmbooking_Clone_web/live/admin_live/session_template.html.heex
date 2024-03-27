@@ -2,7 +2,7 @@
   <.input field={form[:add_name]} type="text" label="Template Name" />
   <.button> Add Template </.button> 
   <%= if is_nil(@template_name) == false do %>
-    <.input field={form[:name]} type="select"  options={@template_name} label="Select A Template" phx-change="selected_template" />
+    <.input field={form[:name]} type="select" options={@template_name} value={@added_template}label="Select A Template" phx-change="selected_template" />
   <% end %>  
 </.simple_form>
 

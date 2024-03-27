@@ -9,10 +9,12 @@ defmodule Mmbooking_CloneWeb.AdminLive.SessionTemplate do
     socket
     |> assign(:sessions, nil)
     |> assign(:template_name, template_name)
+    |> assign(:added_template, "")
     }
   end
 
   def handle_event("add_template", params, socket) do
+    IO.inspect(params, label: "Params")
     sessions =  Admin.add_session_for_template(params["add_name"])
 
     templates = Admin.fetch_all_templates()
@@ -23,6 +25,7 @@ defmodule Mmbooking_CloneWeb.AdminLive.SessionTemplate do
     socket
     |> assign(:template_name, template_name)
     |> assign(:sessions, [sessions])
+    |> assign(:added_template, params["add_name"])
    }
   end
 
