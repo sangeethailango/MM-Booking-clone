@@ -6,7 +6,7 @@ defmodule Mmbooking_Clone.Admin do
   import Ecto.Query
 
 
-  def add_session_for_template(template_name) do
+  def insert_session_for_template(template_name) do
 
     template =
       %Template{
