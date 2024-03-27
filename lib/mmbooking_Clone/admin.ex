@@ -6,7 +6,15 @@ defmodule Mmbooking_Clone.Admin do
   import Ecto.Query
 
 
-  def insert_session_for_template(template_name) do
+  def insert_sessions_for_template(template_name) do
+    if template_name == "Dharshan Day" do
+      insert_sessions_for_template(template_name,  1..8)
+    else
+      insert_sessions_for_template(template_name,  1..7)
+    end
+  end
+
+  def insert_sessions_for_template(template_name, number_of_sessions) do
 
     template_params = %{
       name: template_name
@@ -17,22 +25,23 @@ defmodule Mmbooking_Clone.Admin do
     |> Template.changeset(template_params)
     |> Repo.insert!()
 
-    session_params = %{
-    chamber_time_from: ~T[05:15:30],
-    chamber_to_time: ~T[23:00:07],
-    date: ~D[2029-08-29],
-    report_time_from:  ~T[10:00:00],
-    report_time_to: ~T[20:00:00],
-    seat: 20,
-    session_number: 1,
-    group_name: "First Group",
-    template_id: template.id
-    }
+    for session <- number_of_sessions do
+        session_params = %{
+        chamber_time_from: ~T[05:15:30],
+        chamber_to_time: ~T[23:00:07],
+        date: ~D[2029-08-29],
+        report_time_from:  ~T[10:00:00],
+        report_time_to: ~T[20:00:00],
+        seat: 20,
+        session_number: session,
+        group_name: "#{session} Group ",
+        template_id: template.id
+        }
 
-    %Session{}
-    |> Session.changeset(session_params)
-    |> Repo.insert!()
-
+        %Session{}
+        |> Session.changeset(session_params)
+        |> Repo.insert!()
+    end
   end
 
   def fetch_all_templates() do

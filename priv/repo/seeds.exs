@@ -96,3 +96,8 @@
 #     group_name: "Sixth Group",
 #     template_id: regular_day.id
 #   })
+
+
+# Adding Admin
+
+Mmbooking_Clone.Authentication.add_admin(%{"email" => "sangeethailango21@gmail.com", "password" => "12345678901234567890", "role" => "admin"})

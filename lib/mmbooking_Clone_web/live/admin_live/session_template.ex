@@ -27,14 +27,14 @@ defmodule Mmbooking_CloneWeb.AdminLive.SessionTemplate do
           |> assign(:is_already_added, is_already_added)
           }
         false ->
-          insert_session =  Admin.insert_session_for_template(params["add_name"])
+          insert_session =  Admin.insert_sessions_for_template(params["add_name"])
           templates = Admin.fetch_all_templates()
           template_name = Enum.map(templates, fn name -> name.name end)
 
         {:noreply,
         socket
         |> assign(:template_name, template_name)
-        |> assign(:sessions, [insert_session])
+        |> assign(:sessions, insert_session)
         |> assign(:added_template, params["add_name"])
         |> assign(:is_already_added, false)
         }
