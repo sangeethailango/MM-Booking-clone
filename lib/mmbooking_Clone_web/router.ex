@@ -52,7 +52,7 @@ defmodule Mmbooking_CloneWeb.Router do
     live "/add_admin", AdminLive.AddAdmin
     live "/visitor_booking_details/:id", AdminLive.VisitorBookingDetails
     live "/merge_duplicate_profiles/:id", AdminLive.MergeDuplicateProfile
-
+    live "/session_templates", AdminLive.SessionTemplate
 
   end
 

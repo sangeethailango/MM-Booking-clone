@@ -2,6 +2,9 @@ defmodule Mmbooking_Clone.Admin.Session do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
+
   schema "sessions" do
     field :chamber_time_from, :time
     field :chamber_to_time, :time

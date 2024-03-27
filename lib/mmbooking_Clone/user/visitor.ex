@@ -19,7 +19,6 @@ defmodule Mmbooking_Clone.User.Visitor do
     field :notes, :string
     field :place_of_stay, :string
     field :preferred_date, :date
-    field :visitor_id, :binary_id
 
     timestamps()
   end
