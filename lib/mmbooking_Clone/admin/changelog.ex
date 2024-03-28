@@ -1,4 +1,4 @@
-defmodule Mmbooking_Clone.User.Changelog do
+defmodule Mmbooking_Clone.Admin.Changelog do
   use Ecto.Schema
   import Ecto.Changeset
 

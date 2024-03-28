@@ -33,8 +33,7 @@ defmodule Mmbooking_Clone.User.Visitor do
 
   def add_visitor_admin_changeset(visitor, attrs) do
     visitor
-    |> cast(attrs, [:visitor_id, :email_id, :first_name, :last_name, :dob, :country, :city, :have_you_visited_inner_chamber, :last_date_of_visit, :preferred_date, :alternate_date_of_visit, :place_of_stay, :arrival_date, :departure_date, :notes])
+    |> cast(attrs, [:email_id, :first_name, :last_name, :dob, :country, :city, :have_you_visited_inner_chamber, :last_date_of_visit, :preferred_date, :alternate_date_of_visit, :place_of_stay, :arrival_date, :departure_date, :notes])
     |> validate_required([:email_id, :first_name, :last_name, :dob, :country, :city])
   end
-
 end
