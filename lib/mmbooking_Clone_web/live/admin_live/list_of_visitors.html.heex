@@ -1,0 +1,32 @@
+<.table id="visitors" rows={@list_of_visitors}>
+  <:col :let={visitor} label="First Name">  
+   <%=  visitor.first_name %>
+  </:col>
+  <:col :let={visitor} label="Last Name"><%= visitor.last_name %></:col>
+  <:col :let={visitor} label="Email ID">
+      <%= visitor.email_id %>
+  </:col>
+  <:col :let={visitor} label="country"><%= visitor.country %></:col>
+  <:col :let={visitor} label="city"><%= visitor.city %></:col>
+  <:col :let={visitor} label="DOB"><%= visitor.dob %></:col>
+  <:col :let={visitor} label="Preferred Date"><%= visitor.preferred_date %></:col>
+
+  <:col :let={visitor} label="Edit" ><.button><.link href={~p"/admin/list_of_visitors/#{visitor.id}/edit_visitor"}>Edit</.link></.button></:col>
+</.table>
+
+<.modal
+:if={@live_action in [:edit_visitor]}
+id = "add"
+show
+on_cancel={JS.navigate(~p"/admin/list_of_visitors")}
+> 
+  <.live_component
+    module={Mmbooking_CloneWeb.AdminLive.EditVisitorComponent}
+    id={:edit_visitor}
+    visitor_id={@visitor_id}
+    title={@page_title}
+    live_action={@live_action}
+    navigate={~p"/admin/list_of_visitors"}
+  />
+
+</.modal>

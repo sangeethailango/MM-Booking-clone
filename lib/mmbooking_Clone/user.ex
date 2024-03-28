@@ -11,7 +11,7 @@ defmodule Mmbooking_Clone.User do
 
   def insert_new_visitor(visitor_details) do
     %Visitor{}
-    |> Visitor.add_visitor_admin_changeset(visitor_details)
+    |> Visitor.add_visitor_admin_changeset(visitor_details) |> IO.inspect(label: "Changeset")
     |> Repo.insert!()
   end
 

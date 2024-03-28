@@ -53,6 +53,9 @@ defmodule Mmbooking_CloneWeb.Router do
     live "/visitor_booking_details/:id", AdminLive.VisitorBookingDetails
     live "/merge_duplicate_profiles/:id", AdminLive.MergeDuplicateProfile
     live "/session_templates", AdminLive.SessionTemplate
+    live "/list_of_visitors", AdminLive.ListOfVisitors, :index
+    live "/list_of_visitors/:visitor_id/edit_visitor", AdminLive.ListOfVisitors, :edit_visitor
+
 
   end
 
